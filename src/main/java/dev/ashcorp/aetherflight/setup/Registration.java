@@ -1,7 +1,7 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.blocks.AethergenBlock;
 import dev.ashcorp.aetherflight.blocks.AethergenBE;
+import dev.ashcorp.aetherflight.blocks.AethergenBlock;
 import dev.ashcorp.aetherflight.blocks.AethergenContainer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;

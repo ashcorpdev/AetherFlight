@@ -6,12 +6,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -55,8 +53,6 @@ public class AethergenBE extends BlockEntity {
 
     public void tickServer() {
 
-        LOGGER.info(String.format("Current counter value: %s", counter));
-
         if (counter > 0) {
             energyStorage.addEnergy(AETHERGEN_GENERATE);
             counter--;
@@ -67,6 +63,8 @@ public class AethergenBE extends BlockEntity {
 
             ItemStack stack = itemHandler.getStackInSlot(0);
             if(stack.getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
+
+                // This is probably a very janky way to do this, but it works for now.
                 if(energyStorage.getMaxEnergyStored() > energyStorage.getEnergyStored()) {
 
                     itemHandler.extractItem(0,1,false);
