@@ -11,9 +11,9 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class AetherFlightBlockStates extends BlockStateProvider {
+public class AetherBlockStates extends BlockStateProvider {
 
-    public AetherFlightBlockStates(DataGenerator gen, ExistingFileHelper helper) {
+    public AetherBlockStates(DataGenerator gen, ExistingFileHelper helper) {
         super(gen, AetherFlight.MODID, helper);
     }
 

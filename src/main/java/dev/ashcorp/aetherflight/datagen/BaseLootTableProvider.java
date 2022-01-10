@@ -35,7 +35,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AetherFlightBaseLootTableProvider extends LootTableProvider {
+public abstract class BaseLootTableProvider extends LootTableProvider {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -43,7 +43,7 @@ public abstract class AetherFlightBaseLootTableProvider extends LootTableProvide
     protected final Map<Block, LootTable.Builder> lootTables = new HashMap<>();
     private final DataGenerator generator;
 
-    public AetherFlightBaseLootTableProvider(DataGenerator gen) {
+    public BaseLootTableProvider(DataGenerator gen) {
         super(gen);
         this.generator = gen;
     }
@@ -117,6 +117,6 @@ public abstract class AetherFlightBaseLootTableProvider extends LootTableProvide
 
     @Override
     public String getName() {
-        return "Aether Flight LootTables";
+        return "Aether Flight AetherLootTables";
     }
 }

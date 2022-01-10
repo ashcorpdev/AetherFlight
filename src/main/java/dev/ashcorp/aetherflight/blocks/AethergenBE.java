@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
-import dev.ashcorp.aetherflight.energy.CustomEnergyStorage;
+import dev.ashcorp.aetherflight.energy.AetherStorage;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,7 +35,7 @@ public class AethergenBE extends BlockEntity {
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
-    private final CustomEnergyStorage energyStorage = createEnergy();
+    private final AetherStorage energyStorage = createEnergy();
     private final LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
 
     private int counter;
@@ -166,8 +166,8 @@ public class AethergenBE extends BlockEntity {
         };
     }
 
-    private CustomEnergyStorage createEnergy() {
-        return new CustomEnergyStorage(AETHERGEN_CAPACITY, 0) {
+    private AetherStorage createEnergy() {
+        return new AetherStorage(AETHERGEN_CAPACITY, 0) {
             @Override
             protected void onEnergyChanged() {
                 setChanged();

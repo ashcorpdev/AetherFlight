@@ -8,18 +8,18 @@ import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class AetherFlightBlockTags extends BlockTagsProvider {
+public class AetherBlockTags extends BlockTagsProvider {
 
-    public AetherFlightBlockTags(DataGenerator gen, ExistingFileHelper helper) {
+    public AetherBlockTags(DataGenerator gen, ExistingFileHelper helper) {
         super(gen, AetherFlight.MODID, helper);
     }
 
     @Override
     protected void addTags() {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+        tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(Registration.AETHER_ORE_OVERWORLD.get())
                 .add(Registration.AETHERGEN.get());
-        tag(BlockTags.NEEDS_IRON_TOOL)
+        tag(net.minecraft.tags.BlockTags.NEEDS_IRON_TOOL)
                 .add(Registration.AETHER_ORE_OVERWORLD.get())
                 .add(Registration.AETHERGEN.get());
         tag(Tags.Blocks.ORES)

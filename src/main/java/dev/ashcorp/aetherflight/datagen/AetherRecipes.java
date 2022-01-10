@@ -12,9 +12,9 @@ import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
-public class AetherFlightRecipes extends RecipeProvider {
+public class AetherRecipes extends RecipeProvider {
 
-    public AetherFlightRecipes(DataGenerator gen) {
+    public AetherRecipes(DataGenerator gen) {
         super(gen);
     }
 

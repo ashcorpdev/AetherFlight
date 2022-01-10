@@ -24,6 +24,7 @@ public class AetherFlight
 
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModSetup.setup();
         modbus.addListener(ModSetup::init);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->

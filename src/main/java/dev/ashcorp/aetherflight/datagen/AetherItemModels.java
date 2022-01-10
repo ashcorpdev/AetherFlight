@@ -6,9 +6,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class AetherFlightItemModels extends ItemModelProvider {
+public class AetherItemModels extends ItemModelProvider {
 
-    public AetherFlightItemModels(DataGenerator gen, ExistingFileHelper helper) {
+    public AetherItemModels(DataGenerator gen, ExistingFileHelper helper) {
         super(gen, AetherFlight.MODID, helper);
     }
 

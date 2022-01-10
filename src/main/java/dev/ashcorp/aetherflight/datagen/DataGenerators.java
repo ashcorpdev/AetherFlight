@@ -15,16 +15,16 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         if(event.includeServer()) {
-            generator.addProvider(new AetherFlightRecipes(generator));
-            generator.addProvider(new AetherFlightLootTables(generator));
-            AetherFlightBlockTags blockTags = new AetherFlightBlockTags(generator, event.getExistingFileHelper());
+            generator.addProvider(new AetherRecipes(generator));
+            generator.addProvider(new AetherLootTables(generator));
+            AetherBlockTags blockTags = new AetherBlockTags(generator, event.getExistingFileHelper());
             generator.addProvider(blockTags);
-            generator.addProvider(new AetherFlightItemTags(generator, blockTags, event.getExistingFileHelper()));
+            generator.addProvider(new AetherItemTags(generator, blockTags, event.getExistingFileHelper()));
         }
         if(event.includeClient()) {
-            generator.addProvider(new AetherFlightBlockStates(generator, event.getExistingFileHelper()));
-            generator.addProvider(new AetherFlightItemModels(generator, event.getExistingFileHelper()));
-            generator.addProvider(new AetherFlightLanguageProvider(generator, "en_us"));
+            generator.addProvider(new AetherBlockStates(generator, event.getExistingFileHelper()));
+            generator.addProvider(new AetherItemModels(generator, event.getExistingFileHelper()));
+            generator.addProvider(new AetherLanguageProvider(generator, "en_us"));
         }
     }
 }

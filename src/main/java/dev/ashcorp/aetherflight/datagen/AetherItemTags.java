@@ -8,9 +8,9 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class AetherFlightItemTags extends ItemTagsProvider {
+public class AetherItemTags extends ItemTagsProvider {
 
-    public AetherFlightItemTags(DataGenerator gen, BlockTagsProvider blockTags, ExistingFileHelper helper) {
+    public AetherItemTags(DataGenerator gen, BlockTagsProvider blockTags, ExistingFileHelper helper) {
         super(gen, blockTags, AetherFlight.MODID, helper);
     }
 

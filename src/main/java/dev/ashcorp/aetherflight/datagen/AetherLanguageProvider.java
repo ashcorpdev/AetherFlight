@@ -9,9 +9,9 @@ import static dev.ashcorp.aetherflight.blocks.AethergenBlock.MESSAGE_AETHERGEN;
 import static dev.ashcorp.aetherflight.blocks.AethergenBlock.SCREEN_AETHERFLIGHT_AETHERGEN;
 import static dev.ashcorp.aetherflight.setup.ModSetup.TAB_NAME;
 
-public class AetherFlightLanguageProvider extends LanguageProvider {
+public class AetherLanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
 
-    public AetherFlightLanguageProvider(DataGenerator gen, String locale) {
+    public AetherLanguageProvider(DataGenerator gen, String locale) {
         super(gen, AetherFlight.MODID, locale);
     }
 

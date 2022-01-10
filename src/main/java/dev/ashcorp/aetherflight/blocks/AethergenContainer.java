@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
-import dev.ashcorp.aetherflight.energy.CustomEnergyStorage;
+import dev.ashcorp.aetherflight.energy.AetherStorage;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -58,7 +58,7 @@ public class AethergenContainer extends AbstractContainerMenu {
                 blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
                     int energyStored = h.getEnergyStored() & 0xffff0000;
 
-                    ((CustomEnergyStorage) h).setEnergy(energyStored + (value & 0xffff));
+                    ((AetherStorage) h).setEnergy(energyStored + (value & 0xffff));
 
                 });
             }
@@ -74,7 +74,7 @@ public class AethergenContainer extends AbstractContainerMenu {
             public void set(int value) {
                 blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
                     int energyStored = h.getEnergyStored() & 0x0000ffff;
-                    ((CustomEnergyStorage)h).setEnergy(energyStored | (value << 16));
+                    ((AetherStorage)h).setEnergy(energyStored | (value << 16));
                 });
             }
         });

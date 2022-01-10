@@ -3,9 +3,9 @@ package dev.ashcorp.aetherflight.datagen;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.data.DataGenerator;
 
-public class AetherFlightLootTables extends AetherFlightBaseLootTableProvider {
+public class AetherLootTables extends BaseLootTableProvider {
 
-    public AetherFlightLootTables(DataGenerator gen) {
+    public AetherLootTables(DataGenerator gen) {
         super(gen);
     }
 

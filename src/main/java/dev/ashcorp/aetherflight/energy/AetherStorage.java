@@ -2,9 +2,9 @@ package dev.ashcorp.aetherflight.energy;
 
 import net.minecraftforge.energy.EnergyStorage;
 
-public class CustomEnergyStorage extends EnergyStorage {
+public class AetherStorage extends EnergyStorage {
 
-    public CustomEnergyStorage(int capacity, int maxTransfer) {
+    public AetherStorage(int capacity, int maxTransfer) {
         super(capacity, maxTransfer, 0);
     }
 
