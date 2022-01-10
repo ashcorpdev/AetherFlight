@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "aetherflight:raw_aether_crystal"
+  },
+  "result": "aetherflight:refined_aether_crystal",
+  "experience": 0.0,
+  "cookingtime": 100
+}

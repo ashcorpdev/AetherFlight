@@ -1,0 +1,119 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "aetherflight:block/aethergen/main"
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleoff"
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleoff",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleoff",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleoff",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleoff",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleoff",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleon"
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleon",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleon",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleon",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleon",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "aetherflight:block/aethergen/singleon",
+        "x": 90,
+        "y": 270
+      }
+    }
+  ]
+}

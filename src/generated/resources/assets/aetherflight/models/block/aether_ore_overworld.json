@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "aetherflight:block/aether_ore_overworld"
+  }
+}

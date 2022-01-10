@@ -1,0 +1,9 @@
+{
+  "block.aetherflight.aether_ore_overworld": "Aether Ore",
+  "block.aetherflight.aethergen": "Aether Generator",
+  "item.aetherflight.raw_aether_crystal": "Raw Aether Crystal",
+  "item.aetherflight.refined_aether_crystal": "Refined Aether Crystal",
+  "itemGroup.aether_flight": "Aether Flight",
+  "message.aethergen": "Generates %s aether per tick",
+  "screen.aetherflight.aethergen": "Aether Generator"
+}

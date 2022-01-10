@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "aetherflight:aether_ore"
+  },
+  "result": "aetherflight:refined_aether_crystal",
+  "experience": 1.0,
+  "cookingtime": 100
+}

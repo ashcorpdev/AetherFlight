@@ -1,0 +1,24 @@
+{
+  "textures": {
+    "single": "aetherflight:block/aethergen_on"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        3,
+        3
+      ],
+      "to": [
+        13,
+        13,
+        13
+      ],
+      "faces": {
+        "down": {
+          "texture": "#single"
+        }
+      }
+    }
+  ]
+}
