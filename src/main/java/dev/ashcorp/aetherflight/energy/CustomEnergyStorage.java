@@ -1,6 +1,8 @@
 package dev.ashcorp.aetherflight.energy;
 
 import net.minecraftforge.energy.EnergyStorage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CustomEnergyStorage extends EnergyStorage {
 

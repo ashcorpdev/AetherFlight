@@ -19,6 +19,8 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -26,9 +28,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AethergenBE extends BlockEntity {
 
-    public static final int AETHERGEN_CAPACITY = 50000;
+    public static final int AETHERGEN_CAPACITY = 1000;
     public static final int AETHERGEN_GENERATE = 60;
     public static final int AETHERGEN_SEND = 200;
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -50,6 +54,9 @@ public class AethergenBE extends BlockEntity {
     }
 
     public void tickServer() {
+
+        LOGGER.info(String.format("Current counter value: %s", counter));
+
         if (counter > 0) {
             energyStorage.addEnergy(AETHERGEN_GENERATE);
             counter--;
@@ -57,18 +64,19 @@ public class AethergenBE extends BlockEntity {
         }
 
         if (counter <= 0) {
-            int burnTime;
+
             ItemStack stack = itemHandler.getStackInSlot(0);
             if(stack.getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
-                burnTime = 20;
-            }else {
-                burnTime = 0;
+                if(energyStorage.getMaxEnergyStored() > energyStorage.getEnergyStored()) {
+
+                    itemHandler.extractItem(0,1,false);
+                    counter = 20;
+                    setChanged();
+                }else {
+                    energyStorage.setEnergy(AETHERGEN_CAPACITY);
+                }
             }
-            if (burnTime > 0) {
-                itemHandler.extractItem(0, 1, false);
-                counter = burnTime;
-                setChanged();
-            }
+
         }
 
         BlockState blockState = level.getBlockState(worldPosition);
@@ -142,8 +150,9 @@ public class AethergenBE extends BlockEntity {
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if (stack.getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
                     return true;
+                } else {
+                    return false;
                 }
-                return false;
             }
 
             @Nonnull

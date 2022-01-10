@@ -27,7 +27,7 @@ public class AethergenScreen extends AbstractContainerScreen<AethergenContainer>
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
-        drawString(matrixStack, Minecraft.getInstance().font, "Aether: " + menu.getEnergy(), 10, 10, 0xffffff);
+        drawString(matrixStack, Minecraft.getInstance().font, "Stored Aether: " + menu.getEnergy(), 20, 10, 0xffffff);
     }
 
     @Override

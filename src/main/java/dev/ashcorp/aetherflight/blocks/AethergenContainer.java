@@ -18,14 +18,17 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 
 public class AethergenContainer extends AbstractContainerMenu {
 
-    private final BlockEntity blockEntity;
-    private final Player playerEntity;
-    private final IItemHandler playerInventory;
+    private static final Logger LOGGER = LogManager.getLogger();
+    private BlockEntity blockEntity;
+    private Player playerEntity;
+    private IItemHandler playerInventory;
 
     public AethergenContainer(int windowId, BlockPos pos, Inventory playerInventory, Player player) {
         super(Registration.AETHERGEN_CONTAINER.get(), windowId);
@@ -43,6 +46,8 @@ public class AethergenContainer extends AbstractContainerMenu {
         }
     }
 
+
+    // Dedicated server ints are truncated to short, so this is needed to split the integer storing energy into 2 16-bit integers.
     private void trackPower() {
         addDataSlot(new DataSlot() {
 
@@ -54,16 +59,34 @@ public class AethergenContainer extends AbstractContainerMenu {
             @Override
             public void set(int value) {
                 blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
-                    int energyStored = h.getEnergyStored() & 0xfff0000;
+                    int energyStored = h.getEnergyStored() & 0xffff0000;
 
-                    ((CustomEnergyStorage) h).setEnergy(energyStored = (value & 0xffff));
+                    ((CustomEnergyStorage) h).setEnergy(energyStored + (value & 0xffff));
 
+                });
+            }
+        });
+
+        addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                return (getEnergy() >> 16) & 0xffff;
+            }
+
+            @Override
+            public void set(int value) {
+                blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
+                    int energyStored = h.getEnergyStored() & 0x0000ffff;
+                    ((CustomEnergyStorage)h).setEnergy(energyStored | (value << 16));
                 });
             }
         });
     }
 
     public int getEnergy() {
+
+        LOGGER.info(String.format("Current energy: %s / %s", blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0), blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0)));
+
         return blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
 
     }
