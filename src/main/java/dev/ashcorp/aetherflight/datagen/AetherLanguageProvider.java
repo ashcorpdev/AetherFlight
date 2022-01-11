@@ -3,7 +3,6 @@ package dev.ashcorp.aetherflight.datagen;
 import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.data.LanguageProvider;
 
 import static dev.ashcorp.aetherflight.blocks.AethergenBlock.MESSAGE_AETHERGEN;
 import static dev.ashcorp.aetherflight.blocks.AethergenBlock.SCREEN_AETHERFLIGHT_AETHERGEN;

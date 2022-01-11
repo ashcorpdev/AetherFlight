@@ -1,8 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
 import dev.ashcorp.aetherflight.energy.AetherStorage;
-import dev.ashcorp.aetherflight.lib.AetherPlayerData;
-import dev.ashcorp.aetherflight.lib.IAether;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

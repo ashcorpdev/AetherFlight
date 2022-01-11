@@ -3,8 +3,7 @@ package dev.ashcorp.aetherflight.setup;
 import dev.ashcorp.aetherflight.blocks.AethergenBE;
 import dev.ashcorp.aetherflight.blocks.AethergenBlock;
 import dev.ashcorp.aetherflight.blocks.AethergenContainer;
-import dev.ashcorp.aetherflight.lib.AetherPlayerData;
-import dev.ashcorp.aetherflight.lib.IAether;
+import dev.ashcorp.aetherflight.lib.AetherPlayerCapability;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,7 +35,7 @@ public class Registration {
 
     @SubscribeEvent
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(AetherPlayerData.class);
+        event.register(AetherPlayerCapability.class);
     }
 
     public static void init() {

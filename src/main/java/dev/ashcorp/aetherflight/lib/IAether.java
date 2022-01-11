@@ -10,4 +10,7 @@ public interface IAether {
     BlockPos getAethergenLocation();
     void setAethergenLocation(BlockPos pos);
 
+    boolean getFirstJoin();
+    void setFirstJoin(boolean bool);
+
 }
