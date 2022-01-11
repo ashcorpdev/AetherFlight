@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
-import dev.ashcorp.aetherflight.energy.AetherStorage;
+import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,14 +11,14 @@ import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AethergenContainer extends AbstractContainerMenu {
 
@@ -39,52 +39,26 @@ public class AethergenContainer extends AbstractContainerMenu {
 
             });
             layoutPlayerInventorySlots(10, 70);
-            trackPower();
+            trackAether(player);
         }
+
     }
 
-
-    // Dedicated server ints are truncated to short, so this is needed to split the integer storing energy into 2 16-bit integers.
-    private void trackPower() {
-        addDataSlot(new DataSlot() {
-
-            @Override
-            public int get() {
-                return getEnergy() & 0xffff;
-            }
-
-            @Override
-            public void set(int value) {
-                blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
-                    int energyStored = h.getEnergyStored() & 0xffff0000;
-
-                    ((AetherStorage) h).setEnergy(energyStored + (value & 0xffff));
-
-                });
-            }
-        });
+    private void trackAether(Player player) {
 
         addDataSlot(new DataSlot() {
             @Override
             public int get() {
-                return (getEnergy() >> 16) & 0xffff;
+                return getEnergy(player);
             }
 
             @Override
-            public void set(int value) {
-                blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
-                    int energyStored = h.getEnergyStored() & 0x0000ffff;
-                    ((AetherStorage)h).setEnergy(energyStored | (value << 16));
+            public void set(int pValue) {
+                player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+                    h.setStoredAether(pValue);
                 });
             }
         });
-    }
-
-    public int getEnergy() {
-
-        LOGGER.info(String.format("Current energy: %s / %s", blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0), blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0)));
-
-        return blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
 
     }
 
@@ -92,6 +66,14 @@ public class AethergenContainer extends AbstractContainerMenu {
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(),
                 blockEntity.getBlockPos()), playerEntity, Registration.AETHERGEN.get());
+    }
+
+    public int getEnergy(Player player) {
+        AtomicInteger storedAether = new AtomicInteger();
+        player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+              storedAether.set(h.getStoredAether());
+        });
+        return storedAether.get();
     }
 
     @Override
@@ -155,8 +137,10 @@ public class AethergenContainer extends AbstractContainerMenu {
 
     private void layoutPlayerInventorySlots(int leftCol, int topRow) {
 
+        // Player inventory
         addSlotBox(playerInventory, 9, leftCol, topRow, 9, 18, 3, 18);
 
+        // Hotbar
         topRow += 58;
         addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18);
     }

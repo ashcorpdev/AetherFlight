@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.lib;
+package dev.ashcorp.aetherflight.capabilities;
 
 import net.minecraft.core.BlockPos;
 
@@ -7,6 +7,8 @@ public class AetherPlayerCapability implements IAether {
     private int aetherGenTier = 1;
     private Long aetherGenLocation = 0L;
     private boolean firstJoin = true;
+    private int storedAether = 0;
+    private int maxAether = 5000;
 
     @Override
     public int getAethergenTier() {
@@ -36,5 +38,25 @@ public class AetherPlayerCapability implements IAether {
     @Override
     public void setFirstJoin(boolean bool) {
         this.firstJoin = bool;
+    }
+
+    @Override
+    public int getStoredAether() {
+        return this.storedAether;
+    }
+
+    @Override
+    public void setStoredAether(int aether) {
+        this.storedAether = aether;
+    }
+
+    @Override
+    public int getMaxAether() {
+        return this.maxAether;
+    }
+
+    @Override
+    public void setMaxAether(int maxAether) {
+        this.maxAether = maxAether;
     }
 }

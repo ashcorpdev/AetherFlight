@@ -1,8 +1,8 @@
 package dev.ashcorp.aetherflight.events;
 
 import dev.ashcorp.aetherflight.AetherFlight;
-import dev.ashcorp.aetherflight.lib.CapabilityAetherPlayer;
-import dev.ashcorp.aetherflight.lib.AetherCapabilityProvider;
+import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
+import dev.ashcorp.aetherflight.capabilities.AetherCapabilityProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -34,6 +34,8 @@ public class CapabilityEvents {
                     h.setAethergenLocation(BlockPos.of(0L));
                     h.setAethergenTier(1);
                     h.setFirstJoin(false);
+                    h.setStoredAether(0);
+                    h.setMaxAether(5000);
                 }
 
             });

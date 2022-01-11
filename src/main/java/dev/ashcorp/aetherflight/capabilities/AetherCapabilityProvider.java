@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.lib;
+package dev.ashcorp.aetherflight.capabilities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

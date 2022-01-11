@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.lib;
+package dev.ashcorp.aetherflight.capabilities;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;

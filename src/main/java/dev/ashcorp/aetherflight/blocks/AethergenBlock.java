@@ -56,7 +56,7 @@ public class AethergenBlock extends Block implements EntityBlock {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter reader, List<Component> list, TooltipFlag flags) {
-        list.add(new TranslatableComponent(MESSAGE_AETHERGEN, Integer.toString(AethergenBE.AETHERGEN_GENERATE))
+        list.add(new TranslatableComponent(MESSAGE_AETHERGEN, Integer.toString(0))
         .withStyle(ChatFormatting.BLUE));
     }
 

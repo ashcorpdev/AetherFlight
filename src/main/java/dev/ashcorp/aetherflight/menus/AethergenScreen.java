@@ -4,18 +4,24 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.blocks.AethergenContainer;
+import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 
 public class AethergenScreen extends AbstractContainerScreen<AethergenContainer> {
 
     private final ResourceLocation GUI = new ResourceLocation(AetherFlight.MODID, "textures/gui/aethergen_gui.png");
+    public int storedAether;
 
     public AethergenScreen(AethergenContainer container, Inventory inv, Component name) {
         super(container, inv, name);
+        inv.player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+            storedAether = h.getStoredAether();
+        });
     }
 
     @Override
@@ -27,7 +33,7 @@ public class AethergenScreen extends AbstractContainerScreen<AethergenContainer>
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
-        drawString(matrixStack, Minecraft.getInstance().font, "Stored Aether: " + menu.getEnergy(), 20, 10, 0xffffff);
+        drawString(matrixStack, Minecraft.getInstance().font, "Stored Aether: " + storedAether, 20, 10, 0xffffff);
     }
 
     @Override

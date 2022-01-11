@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.lib;
+package dev.ashcorp.aetherflight.capabilities;
 
 import net.minecraft.core.BlockPos;
 
@@ -12,5 +12,11 @@ public interface IAether {
 
     boolean getFirstJoin();
     void setFirstJoin(boolean bool);
+
+    int getStoredAether();
+    void setStoredAether(int aether);
+
+    int getMaxAether();
+    void setMaxAether(int maxAether);
 
 }
