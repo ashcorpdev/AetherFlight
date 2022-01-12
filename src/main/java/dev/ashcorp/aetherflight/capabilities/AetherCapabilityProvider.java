@@ -33,6 +33,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
             tag.putBoolean("firstJoin", capability.getFirstJoin());
             tag.putLong("aetherGenLocation", capability.getAethergenLocation().asLong());
             tag.putInt("aetherGenTier", capability.getAethergenTier());
+            tag.putInt("storedAether", capability.getStoredAether());
             return tag;
         }
     }
@@ -44,6 +45,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
             capability.setAethergenTier(nbt.getInt("aetherGenTier"));
             capability.setAethergenLocation(BlockPos.of(nbt.getLong("aetherGenLocation")));
             capability.setFirstJoin(nbt.getBoolean("firstJoin"));
+            capability.setStoredAether(nbt.getInt("storedAether"));
         }
 
     }

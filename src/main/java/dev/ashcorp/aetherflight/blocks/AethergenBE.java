@@ -94,12 +94,16 @@ public class AethergenBE extends BlockEntity {
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return stack.getItem() == Registration.REFINED_AETHER_CRYSTAL.get();
+                if (stack.getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             @Override
             public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                if(stack.getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
+                if(stack.getItem() != Registration.REFINED_AETHER_CRYSTAL.get()) {
                     return stack;
                 }
                 return super.insertItem(slot, stack, simulate);
