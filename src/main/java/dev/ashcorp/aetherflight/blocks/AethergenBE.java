@@ -1,11 +1,15 @@
 package dev.ashcorp.aetherflight.blocks;
 
 import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
-import dev.ashcorp.aetherflight.lib.GenericBlockEntity;
+import dev.ashcorp.aetherflight.lib.TickingBlockEntity;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -18,12 +22,12 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.UUID;
 
-public class AethergenBE extends GenericBlockEntity {
+public class AethergenBE extends TickingBlockEntity {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -47,9 +51,14 @@ public class AethergenBE extends GenericBlockEntity {
 
 
     public void tickServer() {
+
         if(this.level != null) {
             if(getOwnerUUID() != null) {
+                LOGGER.info("Found valid owner for AetherGen");
                 player = this.level.getPlayerByUUID(getOwnerUUID());
+            } else {
+                LOGGER.info("No valid owner found for AetherGen!");
+                LOGGER.info(String.format("UUID: %s", getOwnerUUID()));
             }
         }
 
@@ -98,11 +107,32 @@ public class AethergenBE extends GenericBlockEntity {
         counter = tag.getInt("counter");
         super.load(tag);
     }
-    
+
+    @NotNull
+    @Override
+    public CompoundTag save(@NotNull CompoundTag tagCompound) {
+        LOGGER.info("Saving data...");
+        return super.save(tagCompound);
+    }
+
     @Override
     public void saveAdditional(CompoundTag tag) {
+        LOGGER.info("Saving additional data...");
         tag.put("inv", itemHandler.serializeNBT());
         tag.putInt("counter", counter);
+        LOGGER.info("Additional data saved...");
+        super.saveAdditional(tag);
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return super.getUpdatePacket();
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return super.getUpdateTag();
     }
 
     private ItemStackHandler createHandler() {
@@ -138,5 +168,15 @@ public class AethergenBE extends GenericBlockEntity {
             return handler.cast();
         }
         return super.getCapability(capability, side);
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        super.handleUpdateTag(tag);
     }
 }

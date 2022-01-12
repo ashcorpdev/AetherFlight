@@ -32,6 +32,9 @@ public class AethergenScreen extends AbstractContainerScreen<AethergenContainer>
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
+
+        // TODO: 12/01/2022 Fix this not displaying the correct storedAether value
+
         drawString(matrixStack, Minecraft.getInstance().font, "Stored Aether: " + storedAether, 20, 10, 0xffffff);
     }
 

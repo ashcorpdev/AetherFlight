@@ -35,7 +35,6 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public class AethergenBlock extends Block implements EntityBlock {
     public static final String MESSAGE_AETHERGEN = "message.aethergen";
@@ -93,14 +92,15 @@ public class AethergenBlock extends Block implements EntityBlock {
     public void setPlacedBy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
         super.setPlacedBy(world, pos, state, placer, stack);
         if (!world.isClientSide) {
-            setOwner(world, pos, placer);
+
+            BlockEntity te = world.getBlockEntity(pos);
+            if (te instanceof GenericBlockEntity) {
+                GenericBlockEntity genericBlockEntity = (GenericBlockEntity) te;
+                genericBlockEntity.onBlockPlacedBy(world, pos, state, placer, stack);
+            }
         }
 
-        BlockEntity te = world.getBlockEntity(pos);
-        if (te instanceof GenericBlockEntity) {
-            GenericBlockEntity genericBlockEntity = (GenericBlockEntity) te;
-            genericBlockEntity.onBlockPlacedBy(world, pos, state, placer, stack);
-        }
+        setOwner(world, pos, placer);
     }
 
     protected void setOwner(Level level, BlockPos pos, LivingEntity entity) {
