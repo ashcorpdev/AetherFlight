@@ -1,8 +1,6 @@
 package dev.ashcorp.aetherflight.events;
 
-import dev.ashcorp.aetherflight.capabilities.AetherPlayerCapability;
-import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
-import dev.ashcorp.aetherflight.capabilities.IAether;
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,10 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -38,7 +32,7 @@ public class RuntimeEvents {
             BlockState state = event.getState();
 
             if(state.getBlock() == Registration.AETHERGEN.get()) {
-                player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
+                player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
 
                         BlockPos storedPos = capability.getAethergenLocation();
                         if(pos.equals(storedPos)) {
@@ -61,7 +55,7 @@ public class RuntimeEvents {
             BlockState state = event.getPlacedBlock();
 
             if(state.getBlock() == Registration.AETHERGEN.get()) {
-                player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
+                player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
                     LOGGER.info(String.format("Current stored AetherGen location: %s", capability.getAethergenLocation()));
                     if(capability.getAethergenLocation().asLong() == 0L) {
                         capability.setAethergenLocation(pos);
@@ -86,9 +80,9 @@ public class RuntimeEvents {
 
             LOGGER.info("Attempting to copy player data to new player...");
             event.getOriginal().reviveCaps();
-            event.getOriginal().getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(oldCap -> {
+            event.getOriginal().getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(oldCap -> {
                 LOGGER.info("Old player capability found! Loading new player capability...");
-                event.getPlayer().getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(newCap -> {
+                event.getPlayer().getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(newCap -> {
                     LOGGER.info("Loaded new player capability!");
                     // Copy data from old player to new player.
                     newCap.copyFrom(oldCap);
@@ -105,7 +99,7 @@ public class RuntimeEvents {
         BlockPos pos = event.getPos();
         Player player = event.getPlayer();
 
-        player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
+        player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
             BlockPos aetherGenLocation = capability.getAethergenLocation();
             if (pos.equals(aetherGenLocation)) {
                 if (player.isCrouching() && player.getMainHandItem().getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
@@ -120,7 +114,7 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void playerTickEvent(TickEvent.PlayerTickEvent event) {
-        event.player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+        event.player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
 
             BlockPos aetherGenLocation = h.getAethergenLocation();
             BlockPos playerLocation = event.player.getOnPos();
@@ -164,7 +158,7 @@ public class RuntimeEvents {
         Level end = player.getLevel().getServer().getLevel(Level.END);
 
 
-        player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
+        player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
             BlockEntity aetherGen = player.getLevel().getBlockEntity(capability.getAethergenLocation());
             int storedAether = capability.getStoredAether();
             int cost = 5;

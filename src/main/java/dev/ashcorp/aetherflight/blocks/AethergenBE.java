@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
-import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import dev.ashcorp.aetherflight.lib.TickingBlockEntity;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
@@ -26,20 +26,23 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.lang.ref.WeakReference;
 
 public class AethergenBE extends TickingBlockEntity {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     private ItemStackHandler itemHandler = createHandler();
-
     private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
     private int counter;
-    private Player player;
+
+    // Weak reference used here to help with caching data and to prevent memory leaks!
+    private final WeakReference<Player> player;
 
     public AethergenBE(BlockPos pos, BlockState state) {
         super(Registration.AETHERGEN_BE.get(), pos, state);
+        this.player = new WeakReference<>(this.getOwner());
     }
 
     @Override
@@ -52,15 +55,7 @@ public class AethergenBE extends TickingBlockEntity {
 
     public void tickServer() {
 
-        if(this.level != null) {
-            if(getOwnerUUID() != null) {
-                LOGGER.info("Found valid owner for AetherGen");
-                player = this.level.getPlayerByUUID(getOwnerUUID());
-            } else {
-                LOGGER.info("No valid owner found for AetherGen!");
-                LOGGER.info(String.format("UUID: %s", getOwnerUUID()));
-            }
-        }
+        Player player_ = this.player.get();
 
         if (counter > 0) {
             counter--;
@@ -68,8 +63,9 @@ public class AethergenBE extends TickingBlockEntity {
             if(counter <= 0) {
                 // Do energy generation part.
 
-                if(player != null) {
-                    player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
+                if(player_ != null) {
+                    player_.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
+                        LOGGER.info(String.format("Loaded player data. Current aether: %s", h.getStoredAether()));
                         int oldAether = h.getStoredAether();
                         int newAether = oldAether + 5;
                         h.setStoredAether(newAether);

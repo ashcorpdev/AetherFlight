@@ -1,7 +1,7 @@
 package dev.ashcorp.aetherflight.events;
 
 import dev.ashcorp.aetherflight.AetherFlight;
-import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import dev.ashcorp.aetherflight.capabilities.AetherCapabilityProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +26,7 @@ public class CapabilityEvents {
     @SubscribeEvent
     public static void playerJoin(EntityJoinWorldEvent event) {
         if (event.getEntity() instanceof Player player) {
-            player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+            player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
                 boolean firstJoin = h.getFirstJoin();
 
                 if(firstJoin) {

@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
-import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -54,7 +54,7 @@ public class AethergenContainer extends AbstractContainerMenu {
 
             @Override
             public void set(int pValue) {
-                player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+                player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
                     h.setStoredAether(pValue);
                 });
             }
@@ -70,7 +70,7 @@ public class AethergenContainer extends AbstractContainerMenu {
 
     public int getEnergy(Player player) {
         AtomicInteger storedAether = new AtomicInteger();
-        player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+        player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
               storedAether.set(h.getStoredAether());
         });
         return storedAether.get();

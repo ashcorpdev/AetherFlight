@@ -12,12 +12,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import java.lang.ref.WeakReference;
 import java.util.UUID;
 
 public class GenericBlockEntity extends BlockEntity {
 
     private String ownerName = "";
     private UUID ownerUUID = null;
+    private Player player = null;
 
     public GenericBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
         super(pType, pWorldPosition, pBlockState);
@@ -74,20 +76,25 @@ public class GenericBlockEntity extends BlockEntity {
         }
     }
 
-    public void setOwner(Player player) {
+    public void setOwner(Player player_) {
 
         if (ownerUUID != null) {
             // Already has an owner.
             return;
         }
-        ownerUUID = player.getGameProfile().getId();
-        ownerName = player.getName().getString() /* was getFormattedText() */;
+        ownerUUID = player_.getGameProfile().getId();
+        ownerName = player_.getName().getString() /* was getFormattedText() */;
+        player = player_;
         setChanged();
 
     }
 
     public UUID getOwnerUUID() {
         return this.ownerUUID;
+    }
+
+    public Player getOwner() {
+        return this.player;
     }
 
     public void clearOwner() {

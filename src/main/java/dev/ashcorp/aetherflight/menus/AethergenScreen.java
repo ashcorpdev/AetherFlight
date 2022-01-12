@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.blocks.AethergenContainer;
-import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ public class AethergenScreen extends AbstractContainerScreen<AethergenContainer>
 
     public AethergenScreen(AethergenContainer container, Inventory inv, Component name) {
         super(container, inv, name);
-        inv.player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+        inv.player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
             storedAether = h.getStoredAether();
         });
     }

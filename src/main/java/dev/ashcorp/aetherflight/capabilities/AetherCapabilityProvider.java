@@ -26,7 +26,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
 
     @Override
     public CompoundTag serializeNBT() {
-        if (CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY == null) {
+        if (CapabilityManager.AETHER_PLAYER_CAPABILITY == null) {
             return new CompoundTag();
         } else {
             CompoundTag tag = new CompoundTag();
@@ -41,7 +41,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
-        if (CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY != null) {
+        if (CapabilityManager.AETHER_PLAYER_CAPABILITY != null) {
             capability.setAethergenTier(nbt.getInt("aetherGenTier"));
             capability.setAethergenLocation(BlockPos.of(nbt.getLong("aetherGenLocation")));
             capability.setFirstJoin(nbt.getBoolean("firstJoin"));
@@ -50,6 +50,6 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
 
     }
 
-    public void copyFrom(CapabilityAetherPlayer source) {
+    public void copyFrom(CapabilityManager source) {
     }
 }
