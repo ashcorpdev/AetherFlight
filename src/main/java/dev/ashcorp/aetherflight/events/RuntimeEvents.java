@@ -1,6 +1,8 @@
 package dev.ashcorp.aetherflight.events;
 
+import dev.ashcorp.aetherflight.capabilities.AetherPlayerCapability;
 import dev.ashcorp.aetherflight.capabilities.CapabilityAetherPlayer;
+import dev.ashcorp.aetherflight.capabilities.IAether;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,9 +13,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,8 +62,10 @@ public class RuntimeEvents {
 
             if(state.getBlock() == Registration.AETHERGEN.get()) {
                 player.getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
+                    LOGGER.info(String.format("Current stored AetherGen location: %s", capability.getAethergenLocation()));
                     if(capability.getAethergenLocation().asLong() == 0L) {
                         capability.setAethergenLocation(pos);
+                        LOGGER.info("Detected AetherGen placement!");
                     } else {
                         LOGGER.info("Detected Aethergen place when Aethergen already exists!");
                         event.setCanceled(true);
@@ -67,6 +74,29 @@ public class RuntimeEvents {
             }
 
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerCloneEvent(PlayerEvent.Clone event) {
+
+        LOGGER.info("PlayerCloneEvent detected!");
+        LOGGER.info(String.format("Was it player death? %s", event.isWasDeath()));
+
+        if(event.isWasDeath()) {
+
+            LOGGER.info("Attempting to copy player data to new player...");
+            event.getOriginal().reviveCaps();
+            event.getOriginal().getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(oldCap -> {
+                LOGGER.info("Old player capability found! Loading new player capability...");
+                event.getPlayer().getCapability(CapabilityAetherPlayer.AETHER_PLAYER_CAPABILITY).ifPresent(newCap -> {
+                    LOGGER.info("Loaded new player capability!");
+                    // Copy data from old player to new player.
+                    newCap.copyFrom(oldCap);
+                    event.getOriginal().invalidateCaps();
+                });
+            });
+        }
+
     }
 
     @SubscribeEvent

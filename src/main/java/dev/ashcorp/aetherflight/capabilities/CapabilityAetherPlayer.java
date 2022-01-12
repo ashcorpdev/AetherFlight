@@ -6,6 +6,6 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 
 public class CapabilityAetherPlayer {
 
-    public static Capability<IAether> AETHER_PLAYER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    public static Capability<AetherPlayerCapability> AETHER_PLAYER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
 }

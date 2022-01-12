@@ -49,4 +49,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
         }
 
     }
+
+    public void copyFrom(CapabilityAetherPlayer source) {
+    }
 }

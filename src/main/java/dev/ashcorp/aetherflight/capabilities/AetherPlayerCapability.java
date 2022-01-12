@@ -1,8 +1,12 @@
 package dev.ashcorp.aetherflight.capabilities;
 
 import net.minecraft.core.BlockPos;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AetherPlayerCapability implements IAether {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private int aetherGenTier = 1;
     private Long aetherGenLocation = 0L;
@@ -58,5 +62,14 @@ public class AetherPlayerCapability implements IAether {
     @Override
     public void setMaxAether(int maxAether) {
         this.maxAether = maxAether;
+    }
+
+    public void copyFrom(AetherPlayerCapability source) {
+        LOGGER.info("Copying player data...");
+        aetherGenLocation = source.aetherGenLocation;
+        aetherGenTier = source.aetherGenTier;
+        storedAether = source.storedAether;
+        maxAether = source.maxAether;
+        firstJoin = source.firstJoin;
     }
 }
