@@ -1,6 +1,7 @@
 package dev.ashcorp.aetherflight.blocks;
 
 import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
+import dev.ashcorp.aetherflight.lib.Helpers;
 import dev.ashcorp.aetherflight.lib.TickingBlockEntity;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.core.BlockPos;
@@ -42,7 +43,7 @@ public class AethergenBE extends TickingBlockEntity {
 
     public AethergenBE(BlockPos pos, BlockState state) {
         super(Registration.AETHERGEN_BE.get(), pos, state);
-        this.player = new WeakReference<>(this.getOwner());
+        this.player = new WeakReference<>(Helpers.getPlayerFromUUID(getOwnerUUID()));
     }
 
     @Override
@@ -63,7 +64,9 @@ public class AethergenBE extends TickingBlockEntity {
             if(counter <= 0) {
                 // Do energy generation part.
 
+
                 if(player_ != null) {
+                    LOGGER.info(String.format("Processing aether fuel - current player: %s", player_.getDisplayName()));
                     player_.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
                         LOGGER.info(String.format("Loaded player data. Current aether: %s", h.getStoredAether()));
                         int oldAether = h.getStoredAether();
@@ -71,6 +74,9 @@ public class AethergenBE extends TickingBlockEntity {
                         h.setStoredAether(newAether);
                         LOGGER.info(String.format("Updated player aether from %s to %s", oldAether, newAether));
                     });
+                } else {
+                    LOGGER.info("Player object is invalid!");
+                    LOGGER.info(String.format("Owner is set to: %s", Helpers.getPlayerFromUUID(getOwnerUUID())));
                 }
             }
             setChanged();
@@ -107,16 +113,13 @@ public class AethergenBE extends TickingBlockEntity {
     @NotNull
     @Override
     public CompoundTag save(@NotNull CompoundTag tagCompound) {
-        LOGGER.info("Saving data...");
         return super.save(tagCompound);
     }
 
     @Override
     public void saveAdditional(CompoundTag tag) {
-        LOGGER.info("Saving additional data...");
         tag.put("inv", itemHandler.serializeNBT());
         tag.putInt("counter", counter);
-        LOGGER.info("Additional data saved...");
         super.saveAdditional(tag);
     }
 

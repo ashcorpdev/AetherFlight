@@ -14,13 +14,16 @@ import net.minecraft.world.entity.player.Inventory;
 public class AethergenScreen extends AbstractContainerScreen<AethergenContainer> {
 
     private final ResourceLocation GUI = new ResourceLocation(AetherFlight.MODID, "textures/gui/aethergen_gui.png");
-    private int storedAether;
+    private final int storedAether;
 
     public AethergenScreen(AethergenContainer container, Inventory inv, Component name) {
         super(container, inv, name);
+        /*
         inv.player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
             storedAether = h.getStoredAether();
         });
+        */
+        storedAether = container.getEnergy(inv.player);
     }
 
     @Override

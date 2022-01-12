@@ -93,10 +93,6 @@ public class GenericBlockEntity extends BlockEntity {
         return this.ownerUUID;
     }
 
-    public Player getOwner() {
-        return this.player;
-    }
-
     public void clearOwner() {
         ownerUUID = null;
         ownerName = "";
