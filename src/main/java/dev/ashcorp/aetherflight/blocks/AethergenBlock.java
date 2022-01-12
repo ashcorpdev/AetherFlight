@@ -1,5 +1,6 @@
 package dev.ashcorp.aetherflight.blocks;
 
+import dev.ashcorp.aetherflight.lib.GenericBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -8,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -30,8 +32,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 public class AethergenBlock extends Block implements EntityBlock {
     public static final String MESSAGE_AETHERGEN = "message.aethergen";
@@ -83,6 +87,29 @@ public class AethergenBlock extends Block implements EntityBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(BlockStateProperties.POWERED);
+    }
+
+    @Override
+    public void setPlacedBy(@Nonnull Level world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
+        super.setPlacedBy(world, pos, state, placer, stack);
+        if (!world.isClientSide) {
+            setOwner(world, pos, placer);
+        }
+
+        BlockEntity te = world.getBlockEntity(pos);
+        if (te instanceof GenericBlockEntity) {
+            GenericBlockEntity genericBlockEntity = (GenericBlockEntity) te;
+            genericBlockEntity.onBlockPlacedBy(world, pos, state, placer, stack);
+        }
+    }
+
+    protected void setOwner(Level level, BlockPos pos, LivingEntity entity) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof GenericBlockEntity && entity instanceof Player) {
+            GenericBlockEntity genericTileEntity = (GenericBlockEntity) be;
+            Player player = (Player) entity;
+            genericTileEntity.setOwner(player);
+        }
     }
 
     @Nullable

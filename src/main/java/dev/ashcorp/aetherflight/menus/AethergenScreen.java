@@ -10,12 +10,11 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 
 public class AethergenScreen extends AbstractContainerScreen<AethergenContainer> {
 
     private final ResourceLocation GUI = new ResourceLocation(AetherFlight.MODID, "textures/gui/aethergen_gui.png");
-    public int storedAether;
+    private int storedAether;
 
     public AethergenScreen(AethergenContainer container, Inventory inv, Component name) {
         super(container, inv, name);
