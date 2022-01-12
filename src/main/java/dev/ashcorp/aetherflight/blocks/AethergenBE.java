@@ -38,12 +38,8 @@ public class AethergenBE extends TickingBlockEntity {
 
     private int counter;
 
-    // Weak reference used here to help with caching data and to prevent memory leaks!
-    private final WeakReference<Player> player;
-
     public AethergenBE(BlockPos pos, BlockState state) {
         super(Registration.AETHERGEN_BE.get(), pos, state);
-        this.player = new WeakReference<>(Helpers.getPlayerFromUUID(getOwnerUUID()));
     }
 
     @Override
@@ -56,8 +52,6 @@ public class AethergenBE extends TickingBlockEntity {
 
     public void tickServer() {
 
-        Player player_ = this.player.get();
-
         if (counter > 0) {
             counter--;
 
@@ -65,9 +59,9 @@ public class AethergenBE extends TickingBlockEntity {
                 // Do energy generation part.
 
 
-                if(player_ != null) {
-                    LOGGER.info(String.format("Processing aether fuel - current player: %s", player_.getDisplayName()));
-                    player_.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
+                if(getCachedOwner() != null) {
+                    LOGGER.info(String.format("Processing aether fuel - current player: %s", getCachedOwner().getName().getString()));
+                    getCachedOwner().getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
                         LOGGER.info(String.format("Loaded player data. Current aether: %s", h.getStoredAether()));
                         int oldAether = h.getStoredAether();
                         int newAether = oldAether + 5;

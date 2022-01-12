@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.lang.ref.WeakReference;
@@ -20,6 +21,7 @@ public class GenericBlockEntity extends BlockEntity {
     private String ownerName = "";
     private UUID ownerUUID = null;
     private Player player = null;
+    private WeakReference<Player> ownerRef;
 
     public GenericBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
         super(pType, pWorldPosition, pBlockState);
@@ -87,6 +89,18 @@ public class GenericBlockEntity extends BlockEntity {
         player = player_;
         setChanged();
 
+    }
+
+    @Nullable
+    public Player getCachedOwner() {
+        Player owner = ownerRef == null ? null : ownerRef.get();
+        if (owner == null) {
+            owner = Helpers.getPlayerFromUUID(ownerUUID);
+            if (owner != null) {
+                ownerRef = new WeakReference<>(owner);
+            }
+        }
+        return owner;
     }
 
     public UUID getOwnerUUID() {

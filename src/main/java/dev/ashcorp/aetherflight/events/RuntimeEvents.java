@@ -56,10 +56,9 @@ public class RuntimeEvents {
 
             if(state.getBlock() == Registration.AETHERGEN.get()) {
                 player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
-                    LOGGER.info(String.format("Current stored AetherGen location: %s", capability.getAethergenLocation()));
+                    //LOGGER.info(String.format("Current stored AetherGen location: %s", capability.getAethergenLocation()));
                     if(capability.getAethergenLocation().asLong() == 0L) {
                         capability.setAethergenLocation(pos);
-                        LOGGER.info("Detected AetherGen placement!");
                     } else {
                         LOGGER.info("Detected Aethergen place when Aethergen already exists!");
                         event.setCanceled(true);
