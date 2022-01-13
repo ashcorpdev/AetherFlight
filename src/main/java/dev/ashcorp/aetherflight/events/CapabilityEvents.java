@@ -36,6 +36,7 @@ public class CapabilityEvents {
                     h.setFirstJoin(false);
                     h.setStoredAether(0);
                     h.setMaxAether(5000);
+                    player.serializeNBT();
                 }
 
             });

@@ -63,10 +63,17 @@ public class AethergenBE extends TickingBlockEntity {
                     LOGGER.info(String.format("Processing aether fuel - current player: %s", getCachedOwner().getName().getString()));
                     getCachedOwner().getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
                         LOGGER.info(String.format("Loaded player data. Current aether: %s", h.getStoredAether()));
+
+                        // TODO: 12/01/2022 Fix this not actually storing the new aether amount! 
+
                         int oldAether = h.getStoredAether();
                         int newAether = oldAether + 5;
                         h.setStoredAether(newAether);
-                        LOGGER.info(String.format("Updated player aether from %s to %s", oldAether, newAether));
+                        getCachedOwner().serializeNBT();
+
+                        setChanged();
+                        //LOGGER.info(String.format("Updated player aether from %s to %s", oldAether, newAether));
+                        LOGGER.info(String.format("DEBUG -- Current player aether value: %s", h.getStoredAether()));
                     });
                 } else {
                     LOGGER.info("Player object is invalid!");

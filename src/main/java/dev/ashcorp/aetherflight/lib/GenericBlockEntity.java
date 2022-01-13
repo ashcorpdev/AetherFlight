@@ -1,5 +1,6 @@
 package dev.ashcorp.aetherflight.lib;
 
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +21,6 @@ public class GenericBlockEntity extends BlockEntity {
 
     private String ownerName = "";
     private UUID ownerUUID = null;
-    private Player player = null;
     private WeakReference<Player> ownerRef;
 
     public GenericBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -53,6 +53,7 @@ public class GenericBlockEntity extends BlockEntity {
     }
 
     public void load(@NotNull CompoundTag tagCompound) {
+        loadCaps(tagCompound);
         loadInfo(tagCompound);
     }
 
@@ -65,6 +66,7 @@ public class GenericBlockEntity extends BlockEntity {
     }
 
     public void saveAdditional(@Nonnull CompoundTag tagCompound) {
+        saveCaps(tagCompound);
         saveInfo(tagCompound);
     }
 
@@ -78,6 +80,30 @@ public class GenericBlockEntity extends BlockEntity {
         }
     }
 
+
+    protected void saveCaps(CompoundTag tagCompound) {
+        CompoundTag infoTag = getOrCreateInfo(tagCompound);
+        getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+            infoTag.putInt("storedAether", h.getStoredAether());
+            infoTag.putBoolean("firstJoin", h.getFirstJoin());
+            infoTag.putLong("aetherGenLocation", h.getAethergenLocation().asLong());
+            infoTag.putInt("aetherGenTier", h.getAethergenTier());
+            infoTag.putInt("storedAether", h.getStoredAether());
+        });
+    }
+
+    protected void loadCaps(CompoundTag tagCompound) {
+        if (tagCompound.contains("Info")) {
+            CompoundTag infoTag = tagCompound.getCompound("Info");
+            getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+                h.setStoredAether(infoTag.getInt("storedAether"));
+                h.setAethergenTier(infoTag.getInt("aetherGenTier"));
+                h.setAethergenLocation(BlockPos.of(infoTag.getLong("aetherGenLocation")));
+                h.setFirstJoin(infoTag.getBoolean("firstJoin"));
+            });
+        }
+    }
+
     public void setOwner(Player player_) {
 
         if (ownerUUID != null) {
@@ -86,7 +112,6 @@ public class GenericBlockEntity extends BlockEntity {
         }
         ownerUUID = player_.getGameProfile().getId();
         ownerName = player_.getName().getString() /* was getFormattedText() */;
-        player = player_;
         setChanged();
 
     }

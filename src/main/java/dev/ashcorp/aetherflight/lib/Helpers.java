@@ -1,6 +1,7 @@
 package dev.ashcorp.aetherflight.lib;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -21,7 +22,7 @@ public class Helpers {
     }
 
 
-    public static Player getPlayerFromUUID(UUID uuid) {
+    public static ServerPlayer getPlayerFromUUID(UUID uuid) {
 
         return SERVER.getPlayerList().getPlayer(uuid);
     }
