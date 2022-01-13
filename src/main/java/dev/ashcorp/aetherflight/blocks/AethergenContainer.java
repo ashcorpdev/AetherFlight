@@ -76,6 +76,14 @@ public class AethergenContainer extends AbstractContainerMenu {
         return storedAether.get();
     }
 
+    public int getEnergy() {
+        AtomicInteger storedAether = new AtomicInteger();
+        playerEntity.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+            storedAether.set(h.getStoredAether());
+        });
+        return storedAether.intValue();
+    }
+
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
