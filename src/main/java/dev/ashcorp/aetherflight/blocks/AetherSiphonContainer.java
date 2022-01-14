@@ -84,6 +84,14 @@ public class AetherSiphonContainer extends AbstractContainerMenu {
         return storedAether.intValue();
     }
 
+    public int getTier() {
+        AtomicInteger siphonTier = new AtomicInteger();
+        playerEntity.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
+            siphonTier.set(h.getAetherSiphonTier());
+        });
+        return siphonTier.intValue();
+    }
+
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;

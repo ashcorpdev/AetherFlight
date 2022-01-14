@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "window": "aetherflight:block/aethergen_window",
-    "particle": "aetherflight:block/aethergen_off"
+    "window": "aetherflight:block/aethersiphon_window",
+    "particle": "aetherflight:block/aethersiphon_off"
   },
   "elements": [
     {

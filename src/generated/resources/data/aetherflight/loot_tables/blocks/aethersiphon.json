@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "aethergen",
+      "name": "aethersiphon",
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
@@ -36,7 +36,7 @@
             },
             {
               "function": "minecraft:set_contents",
-              "type": "aetherflight:aethergen",
+              "type": "aetherflight:aethersiphon",
               "entries": [
                 {
                   "type": "minecraft:dynamic",
@@ -45,7 +45,7 @@
               ]
             }
           ],
-          "name": "aetherflight:aethergen"
+          "name": "aetherflight:aethersiphon"
         }
       ]
     }

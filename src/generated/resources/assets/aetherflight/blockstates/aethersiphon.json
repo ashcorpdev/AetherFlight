@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "aetherflight:block/aethergen/main"
+        "model": "aetherflight:block/aethersiphon/main"
       }
     },
     {
@@ -10,7 +10,7 @@
         "powered": "false"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleoff"
+        "model": "aetherflight:block/aethersiphon/singleoff"
       }
     },
     {
@@ -18,7 +18,7 @@
         "powered": "false"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleoff",
+        "model": "aetherflight:block/aethersiphon/singleoff",
         "x": 180
       }
     },
@@ -27,7 +27,7 @@
         "powered": "false"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleoff",
+        "model": "aetherflight:block/aethersiphon/singleoff",
         "x": 90
       }
     },
@@ -36,7 +36,7 @@
         "powered": "false"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleoff",
+        "model": "aetherflight:block/aethersiphon/singleoff",
         "x": 270
       }
     },
@@ -45,7 +45,7 @@
         "powered": "false"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleoff",
+        "model": "aetherflight:block/aethersiphon/singleoff",
         "x": 90,
         "y": 90
       }
@@ -55,7 +55,7 @@
         "powered": "false"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleoff",
+        "model": "aetherflight:block/aethersiphon/singleoff",
         "x": 90,
         "y": 270
       }
@@ -65,7 +65,7 @@
         "powered": "true"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleon"
+        "model": "aetherflight:block/aethersiphon/singleon"
       }
     },
     {
@@ -73,7 +73,7 @@
         "powered": "true"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleon",
+        "model": "aetherflight:block/aethersiphon/singleon",
         "x": 180
       }
     },
@@ -82,7 +82,7 @@
         "powered": "true"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleon",
+        "model": "aetherflight:block/aethersiphon/singleon",
         "x": 90
       }
     },
@@ -91,7 +91,7 @@
         "powered": "true"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleon",
+        "model": "aetherflight:block/aethersiphon/singleon",
         "x": 270
       }
     },
@@ -100,7 +100,7 @@
         "powered": "true"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleon",
+        "model": "aetherflight:block/aethersiphon/singleon",
         "x": 90,
         "y": 90
       }
@@ -110,7 +110,7 @@
         "powered": "true"
       },
       "apply": {
-        "model": "aetherflight:block/aethergen/singleon",
+        "model": "aetherflight:block/aethersiphon/singleon",
         "x": 90,
         "y": 270
       }

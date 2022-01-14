@@ -28,9 +28,8 @@ public class AetherSiphonScreen extends AbstractContainerScreen<AetherSiphonCont
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
 
-        // TODO: 12/01/2022 Fix this not displaying the correct storedAether value
-
         drawString(matrixStack, Minecraft.getInstance().font, "Stored Aether: " + menu.getEnergy(), 20, 10, 0xffffff);
+        drawString(matrixStack, Minecraft.getInstance().font, "Aether Siphon Tier: " + menu.getTier(), 20, 20, 0xffffff);
     }
 
     @Override
