@@ -4,11 +4,11 @@ import net.minecraft.core.BlockPos;
 
 public interface IAether {
 
-    int getAethergenTier();
-    void setAethergenTier(int tier);
+    int getAetherSiphonTier();
+    void setAetherSiphonTier(int tier);
 
-    BlockPos getAethergenLocation();
-    void setAethergenLocation(BlockPos pos);
+    BlockPos getAetherSiphonLocation();
+    void setAetherSiphonLocation(BlockPos pos);
 
     boolean getFirstJoin();
     void setFirstJoin(boolean bool);

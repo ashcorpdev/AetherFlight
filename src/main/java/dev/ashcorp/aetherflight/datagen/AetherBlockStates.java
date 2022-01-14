@@ -20,11 +20,11 @@ public class AetherBlockStates extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlock(Registration.AETHER_ORE_OVERWORLD.get());
-        registerAethergen();
+        registerAetherSiphon();
     }
 
-    private void registerAethergen() {
-        BlockModelBuilder frame = models().getBuilder("block/aethergen/main");
+    private void registerAetherSiphon() {
+        BlockModelBuilder frame = models().getBuilder("block/aethersiphon/main");
         frame.parent(models().getExistingFile(mcLoc("cube")));
 
         floatingCube(frame, 0f, 0f, 0f, 1f, 16f, 1f);
@@ -44,10 +44,10 @@ public class AetherBlockStates extends BlockStateProvider {
 
         floatingCube(frame, 1f, 1f, 1f, 15f, 15f, 15f);
 
-        frame.texture("window", modLoc("block/aethergen_window"));
-        frame.texture("particle", modLoc("block/aethergen_off"));
+        frame.texture("window", modLoc("block/aethersiphon_window"));
+        frame.texture("particle", modLoc("block/aethersiphon_off"));
 
-        createAethergenModel(Registration.AETHERSIPHON.get(), frame);
+        createAetherSiphonModel(Registration.AETHERSIPHON.get(), frame);
     }
 
     private void floatingCube(BlockModelBuilder builder, float fx, float fy, float fz, float tx, float ty, float tz) {
@@ -58,13 +58,13 @@ public class AetherBlockStates extends BlockStateProvider {
                 .end();
     }
 
-    private void createAethergenModel(Block block, BlockModelBuilder frame) {
-        BlockModelBuilder singleOff = models().getBuilder("block/aethergen/singleoff")
+    private void createAetherSiphonModel(Block block, BlockModelBuilder frame) {
+        BlockModelBuilder singleOff = models().getBuilder("block/aethersiphon/singleoff")
                 .element().from(3,3,3).to(13,13,13).face(Direction.DOWN).texture("#single").end().end()
-                .texture("single", modLoc("block/aethergen_off"));
-        BlockModelBuilder singleOn = models().getBuilder("block/aethergen/singleon")
+                .texture("single", modLoc("block/aethersiphon_off"));
+        BlockModelBuilder singleOn = models().getBuilder("block/aethersiphon/singleon")
                 .element().from(3,3,3).to(13,13,13).face(Direction.DOWN).texture("#single").end().end()
-                .texture("single", modLoc("block/aethergen_on"));
+                .texture("single", modLoc("block/aethersiphon_on"));
 
         MultiPartBlockStateBuilder bld = getMultipartBuilder(block);
 

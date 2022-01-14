@@ -15,6 +15,6 @@ public class AetherLootTables extends BaseLootTableProvider {
         lootTables.put(Registration.AETHER_ORE_OVERWORLD.get(), createSilkTouchTable("aether_ore_overworld",
                 Registration.AETHER_ORE_OVERWORLD.get(), Registration.RAW_AETHER_CRYSTAL.get(), 1, 3));
 
-        lootTables.put(Registration.AETHERSIPHON.get(), createStandardTable("aethergen", Registration.AETHERSIPHON.get(), Registration.AETHERSIPHON_BE.get()));
+        lootTables.put(Registration.AETHERSIPHON.get(), createStandardTable("aethersiphon", Registration.AETHERSIPHON.get(), Registration.AETHERSIPHON_BE.get()));
     }
 }

@@ -31,8 +31,8 @@ public class CapabilityEvents {
 
                 if(firstJoin) {
                     // If the player is joining for the first time set up the capability.
-                    h.setAethergenLocation(BlockPos.of(0L));
-                    h.setAethergenTier(1);
+                    h.setAetherSiphonLocation(BlockPos.of(0L));
+                    h.setAetherSiphonTier(1);
                     h.setFirstJoin(false);
                     h.setStoredAether(0);
                     h.setMaxAether(5000);

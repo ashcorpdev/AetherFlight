@@ -31,8 +31,8 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
         } else {
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("firstJoin", capability.getFirstJoin());
-            tag.putLong("aetherGenLocation", capability.getAethergenLocation().asLong());
-            tag.putInt("aetherGenTier", capability.getAethergenTier());
+            tag.putLong("aetherSiphonLocation", capability.getAetherSiphonLocation().asLong());
+            tag.putInt("aetherSiphonTier", capability.getAetherSiphonTier());
             tag.putInt("storedAether", capability.getStoredAether());
             return tag;
         }
@@ -42,8 +42,8 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
     public void deserializeNBT(CompoundTag nbt) {
 
         if (CapabilityManager.AETHER_PLAYER_CAPABILITY != null) {
-            capability.setAethergenTier(nbt.getInt("aetherGenTier"));
-            capability.setAethergenLocation(BlockPos.of(nbt.getLong("aetherGenLocation")));
+            capability.setAetherSiphonTier(nbt.getInt("aetherSiphonTier"));
+            capability.setAetherSiphonLocation(BlockPos.of(nbt.getLong("aetherSiphonLocation")));
             capability.setFirstJoin(nbt.getBoolean("firstJoin"));
             capability.setStoredAether(nbt.getInt("storedAether"));
         }

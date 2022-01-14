@@ -37,8 +37,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class AetherSiphonBlock extends Block implements EntityBlock {
-    public static final String MESSAGE_AETHERGEN = "message.aethergen";
-    public static final String SCREEN_AETHERFLIGHT_AETHERGEN = "screen.aetherflight.aethergen";
+    public static final String MESSAGE_AETHERSIPHON = "message.aethersiphon";
+    public static final String SCREEN_AETHERFLIGHT_AETHERSIPHON = "screen.aetherflight.aethersiphon";
 
     private static final VoxelShape RENDER_SHAPE = Shapes.box(0.1,0.1,0.1,0.9,0.9,0.9);
 
@@ -59,7 +59,7 @@ public class AetherSiphonBlock extends Block implements EntityBlock {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter reader, List<Component> list, TooltipFlag flags) {
-        list.add(new TranslatableComponent(MESSAGE_AETHERGEN, Integer.toString(0))
+        list.add(new TranslatableComponent(MESSAGE_AETHERSIPHON, Integer.toString(0))
         .withStyle(ChatFormatting.BLUE));
     }
 
@@ -122,7 +122,7 @@ public class AetherSiphonBlock extends Block implements EntityBlock {
 
                     @Override
                     public Component getDisplayName() {
-                        return new TranslatableComponent(SCREEN_AETHERFLIGHT_AETHERGEN);
+                        return new TranslatableComponent(SCREEN_AETHERFLIGHT_AETHERSIPHON);
                     }
 
                     @Override
@@ -134,7 +134,7 @@ public class AetherSiphonBlock extends Block implements EntityBlock {
                 NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
 
             } else {
-                throw new IllegalStateException("Aethergen named container provider is missing!");
+                throw new IllegalStateException("AetherSiphon named container provider is missing!");
             }
         }
         return InteractionResult.SUCCESS;

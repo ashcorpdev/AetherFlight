@@ -34,12 +34,12 @@ public class RuntimeEvents {
             if(state.getBlock() == Registration.AETHERSIPHON.get()) {
                 player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
 
-                        BlockPos storedPos = capability.getAethergenLocation();
+                        BlockPos storedPos = capability.getAetherSiphonLocation();
                         if(pos.equals(storedPos)) {
-                            // This means the block is the users' aethergen.
-                            capability.setAethergenLocation(BlockPos.of(0L));
+                            // This means the block is the users' aethersiphon.
+                            capability.setAetherSiphonLocation(BlockPos.of(0L));
                         } else {
-                            LOGGER.error("Detected Aethergen break, but didn't match position!");
+                            LOGGER.error("Detected AetherSiphon break, but didn't match position!");
                             LOGGER.error(String.format("Expected:  %s | Actual: %s", pos, storedPos));
                         }
                 });
@@ -56,11 +56,11 @@ public class RuntimeEvents {
 
             if(state.getBlock() == Registration.AETHERSIPHON.get()) {
                 player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
-                    //LOGGER.info(String.format("Current stored AetherGen location: %s", capability.getAethergenLocation()));
-                    if(capability.getAethergenLocation().asLong() == 0L) {
-                        capability.setAethergenLocation(pos);
+                    //LOGGER.info(String.format("Current stored AetherSiphon location: %s", capability.getAetherSiphonLocation()));
+                    if(capability.getAetherSiphonLocation().asLong() == 0L) {
+                        capability.setAetherSiphonLocation(pos);
                     } else {
-                        LOGGER.info("Detected Aethergen place when Aethergen already exists!");
+                        LOGGER.info("Detected AetherSiphon place when AetherSiphon already exists!");
                         event.setCanceled(true);
                     }
                 });
@@ -99,11 +99,11 @@ public class RuntimeEvents {
         Player player = event.getPlayer();
 
         player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
-            BlockPos aetherGenLocation = capability.getAethergenLocation();
+            BlockPos aetherGenLocation = capability.getAetherSiphonLocation();
             if (pos.equals(aetherGenLocation)) {
                 if (player.isCrouching() && player.getMainHandItem().getItem() == Registration.REFINED_AETHER_CRYSTAL.get()) {
-                    // If player is crouched and interacts with the aethergen, do something!
-                    LOGGER.info("Aethergen interacted with using a crystal!");
+                    // If player is crouched and interacts with the aethersiphon, do something!
+                    LOGGER.info("AetherSiphon interacted with using a crystal!");
                     event.setCanceled(true);
                 }
             }
@@ -115,10 +115,10 @@ public class RuntimeEvents {
     public static void playerTickEvent(TickEvent.PlayerTickEvent event) {
         event.player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
 
-            BlockPos aetherGenLocation = h.getAethergenLocation();
+            BlockPos aetherGenLocation = h.getAetherSiphonLocation();
             BlockPos playerLocation = event.player.getOnPos();
             LivingEntity entity = event.player;
-            int aetherGenTier = h.getAethergenTier();
+            int aetherGenTier = h.getAetherSiphonTier();
 
             if(aetherGenLocation.asLong() == BlockPos.ZERO.asLong()) {
                 // If there is no aetherGenLocation placed, just return.
@@ -160,7 +160,7 @@ public class RuntimeEvents {
 
         player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
             LOGGER.info(String.format("Ticking player with Aether! Current aether: %s", capability.getStoredAether()));
-            BlockEntity aetherGen = player.getLevel().getBlockEntity(capability.getAethergenLocation());
+            BlockEntity aetherGen = player.getLevel().getBlockEntity(capability.getAetherSiphonLocation());
             int storedAether = capability.getStoredAether();
             int cost = 1;
 
@@ -201,7 +201,7 @@ public class RuntimeEvents {
                         ((ServerPlayer) player).onUpdateAbilities();
                     } else if (currentDimension.equals(nether)) {
 
-                        //Check aether amounts in aethergen - if aether > 0, then allow flight.
+                        //Check aether amounts in aethersiphon - if aether > 0, then allow flight.
 
                     }
 

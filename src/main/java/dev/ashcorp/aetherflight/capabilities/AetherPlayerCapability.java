@@ -8,30 +8,30 @@ public class AetherPlayerCapability implements IAether {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private int aetherGenTier = 1;
-    private Long aetherGenLocation = 0L;
+    private int aetherSiphonTier = 1;
+    private Long aetherSiphonLocation = 0L;
     private boolean firstJoin = true;
     private int storedAether = 0;
     private int maxAether = 5000;
 
     @Override
-    public int getAethergenTier() {
-        return aetherGenTier;
+    public int getAetherSiphonTier() {
+        return aetherSiphonTier;
     }
 
     @Override
-    public void setAethergenTier(int tier) {
-        this.aetherGenTier = tier;
+    public void setAetherSiphonTier(int tier) {
+        this.aetherSiphonTier = tier;
     }
 
     @Override
-    public BlockPos getAethergenLocation() {
-        return BlockPos.of(aetherGenLocation);
+    public BlockPos getAetherSiphonLocation() {
+        return BlockPos.of(aetherSiphonLocation);
     }
 
     @Override
-    public void setAethergenLocation(BlockPos pos) {
-        this.aetherGenLocation = pos.asLong();
+    public void setAetherSiphonLocation(BlockPos pos) {
+        this.aetherSiphonLocation = pos.asLong();
     }
 
     @Override
@@ -66,8 +66,8 @@ public class AetherPlayerCapability implements IAether {
 
     public void copyFrom(AetherPlayerCapability source) {
         LOGGER.info("Copying player data...");
-        aetherGenLocation = source.aetherGenLocation;
-        aetherGenTier = source.aetherGenTier;
+        aetherSiphonLocation = source.aetherSiphonLocation;
+        aetherSiphonTier = source.aetherSiphonTier;
         storedAether = source.storedAether;
         maxAether = source.maxAether;
         firstJoin = source.firstJoin;

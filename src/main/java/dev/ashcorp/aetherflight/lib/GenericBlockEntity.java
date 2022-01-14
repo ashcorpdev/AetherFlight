@@ -86,8 +86,8 @@ public class GenericBlockEntity extends BlockEntity {
         getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
             infoTag.putInt("storedAether", h.getStoredAether());
             infoTag.putBoolean("firstJoin", h.getFirstJoin());
-            infoTag.putLong("aetherGenLocation", h.getAethergenLocation().asLong());
-            infoTag.putInt("aetherGenTier", h.getAethergenTier());
+            infoTag.putLong("aetherGenLocation", h.getAetherSiphonLocation().asLong());
+            infoTag.putInt("aetherGenTier", h.getAetherSiphonTier());
             infoTag.putInt("storedAether", h.getStoredAether());
         });
     }
@@ -97,8 +97,8 @@ public class GenericBlockEntity extends BlockEntity {
             CompoundTag infoTag = tagCompound.getCompound("Info");
             getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h -> {
                 h.setStoredAether(infoTag.getInt("storedAether"));
-                h.setAethergenTier(infoTag.getInt("aetherGenTier"));
-                h.setAethergenLocation(BlockPos.of(infoTag.getLong("aetherGenLocation")));
+                h.setAetherSiphonTier(infoTag.getInt("aetherGenTier"));
+                h.setAetherSiphonLocation(BlockPos.of(infoTag.getLong("aetherGenLocation")));
                 h.setFirstJoin(infoTag.getBoolean("firstJoin"));
             });
         }

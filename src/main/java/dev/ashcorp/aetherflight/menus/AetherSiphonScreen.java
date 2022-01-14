@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AetherSiphonScreen extends AbstractContainerScreen<AetherSiphonContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(AetherFlight.MODID, "textures/gui/aethergen_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(AetherFlight.MODID, "textures/gui/aethersiphon_gui.png");
 
     public AetherSiphonScreen(AetherSiphonContainer container, Inventory inv, Component name) {
         super(container, inv, name);
