@@ -30,7 +30,7 @@ public class AetherRecipes extends RecipeProvider {
                 .unlockedBy("has_chunk", has(Registration.RAW_AETHER_CRYSTAL.get()))
                 .save(consumer, "aether_crystal2");
 
-        ShapedRecipeBuilder.shaped(Registration.AETHERGEN.get())
+        ShapedRecipeBuilder.shaped(Registration.AETHERSIPHON.get())
                 .pattern("mmm")
                 .pattern("x#x")
                 .pattern("#x#")

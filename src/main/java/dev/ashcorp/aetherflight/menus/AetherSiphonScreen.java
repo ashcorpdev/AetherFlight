@@ -3,19 +3,18 @@ package dev.ashcorp.aetherflight.menus;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.ashcorp.aetherflight.AetherFlight;
-import dev.ashcorp.aetherflight.blocks.AethergenContainer;
-import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
+import dev.ashcorp.aetherflight.blocks.AetherSiphonContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AethergenScreen extends AbstractContainerScreen<AethergenContainer> {
+public class AetherSiphonScreen extends AbstractContainerScreen<AetherSiphonContainer> {
 
     private final ResourceLocation GUI = new ResourceLocation(AetherFlight.MODID, "textures/gui/aethergen_gui.png");
 
-    public AethergenScreen(AethergenContainer container, Inventory inv, Component name) {
+    public AetherSiphonScreen(AetherSiphonContainer container, Inventory inv, Component name) {
         super(container, inv, name);
     }
 

@@ -11,7 +11,6 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,9 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.lang.ref.WeakReference;
 
-public class AethergenBE extends TickingBlockEntity {
+public class AetherSiphonBlockEntity extends TickingBlockEntity {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -38,8 +36,8 @@ public class AethergenBE extends TickingBlockEntity {
 
     private int counter;
 
-    public AethergenBE(BlockPos pos, BlockState state) {
-        super(Registration.AETHERGEN_BE.get(), pos, state);
+    public AetherSiphonBlockEntity(BlockPos pos, BlockState state) {
+        super(Registration.AETHERSIPHON_BE.get(), pos, state);
     }
 
     @Override
@@ -64,10 +62,8 @@ public class AethergenBE extends TickingBlockEntity {
                     getCachedOwner().getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(h ->{
                         LOGGER.info(String.format("Loaded player data. Current aether: %s", h.getStoredAether()));
 
-                        // TODO: 12/01/2022 Fix this not actually storing the new aether amount! 
-
                         int oldAether = h.getStoredAether();
-                        int newAether = oldAether + 5;
+                        int newAether = oldAether + 60;
                         h.setStoredAether(newAether);
                         getCachedOwner().serializeNBT();
 

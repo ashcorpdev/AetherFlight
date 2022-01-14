@@ -1,8 +1,8 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.blocks.AethergenBE;
-import dev.ashcorp.aetherflight.blocks.AethergenBlock;
-import dev.ashcorp.aetherflight.blocks.AethergenContainer;
+import dev.ashcorp.aetherflight.blocks.AetherSiphonBlock;
+import dev.ashcorp.aetherflight.blocks.AetherSiphonBlockEntity;
+import dev.ashcorp.aetherflight.blocks.AetherSiphonContainer;
 import dev.ashcorp.aetherflight.capabilities.AetherPlayerCapability;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -61,10 +61,10 @@ public class Registration {
     public static final Tags.IOptionalNamedTag<Block> AETHER_ORE = BlockTags.createOptional(new ResourceLocation(MODID, "aether_ore"));
     public static final Tags.IOptionalNamedTag<Item> AETHER_ORE_ITEM = ItemTags.createOptional(new ResourceLocation(MODID, "aether_ore"));
 
-    public static final RegistryObject<AethergenBlock> AETHERGEN = BLOCKS.register("aethergen", AethergenBlock::new);
-    public static final RegistryObject<Item> AETHERGEN_ITEM = fromBlock(AETHERGEN);
-    public static final RegistryObject<BlockEntityType<AethergenBE>> AETHERGEN_BE = BLOCK_ENTITIES.register("aethergen", () -> BlockEntityType.Builder.of(AethergenBE::new, AETHERGEN.get()).build(null));
-    public static final RegistryObject<MenuType<AethergenContainer>> AETHERGEN_CONTAINER = CONTAINERS.register("aethergen", () -> IForgeMenuType.create((windowId, inv, data) -> new AethergenContainer(windowId, data.readBlockPos(), inv, inv.player)));
+    public static final RegistryObject<AetherSiphonBlock> AETHERSIPHON = BLOCKS.register("aethersiphon", AetherSiphonBlock::new);
+    public static final RegistryObject<Item> AETHERSIPHON_ITEM = fromBlock(AETHERSIPHON);
+    public static final RegistryObject<BlockEntityType<AetherSiphonBlockEntity>> AETHERSIPHON_BE = BLOCK_ENTITIES.register("aethersiphon", () -> BlockEntityType.Builder.of(AetherSiphonBlockEntity::new, AETHERSIPHON.get()).build(null));
+    public static final RegistryObject<MenuType<AetherSiphonContainer>> AETHERSIPHON_CONTAINER = CONTAINERS.register("aethersiphon", () -> IForgeMenuType.create((windowId, inv, data) -> new AetherSiphonContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
 
     // Convenience function to get the corresponding RegistryObject<Item> from a RegistryObject<Block>.

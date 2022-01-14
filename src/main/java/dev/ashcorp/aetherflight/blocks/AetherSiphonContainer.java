@@ -20,15 +20,15 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AethergenContainer extends AbstractContainerMenu {
+public class AetherSiphonContainer extends AbstractContainerMenu {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private BlockEntity blockEntity;
     private Player playerEntity;
     private IItemHandler playerInventory;
 
-    public AethergenContainer(int windowId, BlockPos pos, Inventory playerInventory, Player player) {
-        super(Registration.AETHERGEN_CONTAINER.get(), windowId);
+    public AetherSiphonContainer(int windowId, BlockPos pos, Inventory playerInventory, Player player) {
+        super(Registration.AETHERSIPHON_CONTAINER.get(), windowId);
         blockEntity = player.getCommandSenderWorld().getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
@@ -65,7 +65,7 @@ public class AethergenContainer extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(),
-                blockEntity.getBlockPos()), playerEntity, Registration.AETHERGEN.get());
+                blockEntity.getBlockPos()), playerEntity, Registration.AETHERSIPHON.get());
     }
 
     public int getEnergy(Player player) {

@@ -1,8 +1,8 @@
 package dev.ashcorp.aetherflight.events;
 
 import dev.ashcorp.aetherflight.AetherFlight;
-import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import dev.ashcorp.aetherflight.capabilities.AetherCapabilityProvider;
+import dev.ashcorp.aetherflight.capabilities.CapabilityManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;

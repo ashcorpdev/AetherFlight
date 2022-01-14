@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.blocks.Ores;
+import dev.ashcorp.aetherflight.blocks.AetherOres;
 import dev.ashcorp.aetherflight.lib.Helpers;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -21,13 +21,13 @@ public class ModSetup {
 
     public static void setup() {
         IEventBus bus = MinecraftForge.EVENT_BUS;
-        bus.addListener(Ores::onBiomeLoadingEvent);
+        bus.addListener(AetherOres::onBiomeLoadingEvent);
         bus.addListener(Helpers::onServerStartedEvent);
     }
 
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            Ores.registerConfiguredFeatures();
+            AetherOres.registerConfiguredFeatures();
         });
     }
 }

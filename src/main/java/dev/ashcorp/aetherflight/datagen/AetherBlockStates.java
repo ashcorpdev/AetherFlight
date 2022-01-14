@@ -47,7 +47,7 @@ public class AetherBlockStates extends BlockStateProvider {
         frame.texture("window", modLoc("block/aethergen_window"));
         frame.texture("particle", modLoc("block/aethergen_off"));
 
-        createAethergenModel(Registration.AETHERGEN.get(), frame);
+        createAethergenModel(Registration.AETHERSIPHON.get(), frame);
     }
 
     private void floatingCube(BlockModelBuilder builder, float fx, float fy, float fz, float tx, float ty, float tz) {

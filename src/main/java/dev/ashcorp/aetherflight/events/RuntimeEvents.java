@@ -31,7 +31,7 @@ public class RuntimeEvents {
             BlockPos pos = event.getPos();
             BlockState state = event.getState();
 
-            if(state.getBlock() == Registration.AETHERGEN.get()) {
+            if(state.getBlock() == Registration.AETHERSIPHON.get()) {
                 player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
 
                         BlockPos storedPos = capability.getAethergenLocation();
@@ -54,7 +54,7 @@ public class RuntimeEvents {
             BlockPos pos = event.getPos();
             BlockState state = event.getPlacedBlock();
 
-            if(state.getBlock() == Registration.AETHERGEN.get()) {
+            if(state.getBlock() == Registration.AETHERSIPHON.get()) {
                 player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
                     //LOGGER.info(String.format("Current stored AetherGen location: %s", capability.getAethergenLocation()));
                     if(capability.getAethergenLocation().asLong() == 0L) {
@@ -151,6 +151,7 @@ public class RuntimeEvents {
     private static void addTierEffects(LivingEntity player, int tier) {
 
 
+
         Level currentDimension = player.getLevel();
         Level overworld = player.getLevel().getServer().getLevel(Level.OVERWORLD);
         Level nether = player.getLevel().getServer().getLevel(Level.NETHER);
@@ -158,9 +159,10 @@ public class RuntimeEvents {
 
 
         player.getCapability(CapabilityManager.AETHER_PLAYER_CAPABILITY).ifPresent(capability -> {
+            LOGGER.info(String.format("Ticking player with Aether! Current aether: %s", capability.getStoredAether()));
             BlockEntity aetherGen = player.getLevel().getBlockEntity(capability.getAethergenLocation());
             int storedAether = capability.getStoredAether();
-            int cost = 5;
+            int cost = 1;
 
             switch(tier) {
                 case 1:
@@ -176,6 +178,15 @@ public class RuntimeEvents {
 
                         // Subtract aether per tick to fly!
                         capability.setStoredAether(storedAether - cost);
+                        player.serializeNBT();
+
+                    } else if (currentDimension.equals(overworld) && storedAether <= 0) {
+
+                        // If the player isn't a server player, or they are in the creative mode.
+                        ((ServerPlayer) player).getAbilities().mayfly = false;
+                        ((ServerPlayer) player).onUpdateAbilities();
+                        capability.setStoredAether(0);
+                        player.serializeNBT();
                     }
 
                     break;
@@ -211,6 +222,7 @@ public class RuntimeEvents {
                     break;
 
             }
+
         });
 
     }

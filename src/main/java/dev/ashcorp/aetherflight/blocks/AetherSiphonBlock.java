@@ -36,13 +36,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class AethergenBlock extends Block implements EntityBlock {
+public class AetherSiphonBlock extends Block implements EntityBlock {
     public static final String MESSAGE_AETHERGEN = "message.aethergen";
     public static final String SCREEN_AETHERFLIGHT_AETHERGEN = "screen.aetherflight.aethergen";
 
     private static final VoxelShape RENDER_SHAPE = Shapes.box(0.1,0.1,0.1,0.9,0.9,0.9);
 
-    public AethergenBlock() {
+    public AetherSiphonBlock() {
         super(Properties.of(Material.METAL)
         .sound(SoundType.METAL)
         .strength(2.0f)
@@ -66,7 +66,7 @@ public class AethergenBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new AethergenBE(pos, state);
+        return new AetherSiphonBlockEntity(pos, state);
     }
 
     @Nullable
@@ -76,7 +76,7 @@ public class AethergenBlock extends Block implements EntityBlock {
             return null;
         }
         return (lvl, pos, blockState, t) -> {
-            if(t instanceof AethergenBE tile) {
+            if(t instanceof AetherSiphonBlockEntity tile) {
                 tile.tickServer();
             }
         };
@@ -117,7 +117,7 @@ public class AethergenBlock extends Block implements EntityBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
         if(!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(pos);
-            if(be instanceof AethergenBE) {
+            if(be instanceof AetherSiphonBlockEntity) {
                 MenuProvider containerProvider = new MenuProvider() {
 
                     @Override
@@ -127,7 +127,7 @@ public class AethergenBlock extends Block implements EntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-                        return new AethergenContainer(windowId, pos, playerInventory, playerEntity);
+                        return new AetherSiphonContainer(windowId, pos, playerInventory, playerEntity);
                     }
                 };
 

@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
-public class Ores {
+public class AetherOres {
 
     public static final int AETHER_ORE_OVERWORLD_VEINSIZE = 5;
     public static final int AETHER_ORE_OVERWORLD_AMOUNT = 3;

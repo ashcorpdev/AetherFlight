@@ -23,7 +23,7 @@ public class AetherItemModels extends ItemModelProvider {
         singleTexture(Registration.REFINED_AETHER_CRYSTAL.get().getRegistryName().getPath(), mcLoc("item/generated"),
                 "layer0", modLoc("item/refined_aether_crystal"));
 
-        withExistingParent(Registration.AETHERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/aethergen/main"));
+        withExistingParent(Registration.AETHERSIPHON_ITEM.get().getRegistryName().getPath(), modLoc("block/aethergen/main"));
 
     }
 }
