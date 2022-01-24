@@ -1,6 +1,6 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.capabilities.AetherPlayerCapability;
+import dev.ashcorp.aetherflight.capabilities.AetherItemCapability;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -31,7 +31,7 @@ public class Registration {
 
     @SubscribeEvent
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(AetherPlayerCapability.class);
+        event.register(AetherItemCapability.class);
     }
 
     public static void init() {

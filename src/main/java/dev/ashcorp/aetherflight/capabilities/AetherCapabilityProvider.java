@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class AetherCapabilityProvider implements ICapabilitySerializable<CompoundTag> {
 
-    private final AetherPlayerCapability capability = new AetherPlayerCapability();
+    private final AetherItemCapability capability = new AetherItemCapability();
     private final LazyOptional<IAether> capabilityOptional = LazyOptional.of(() -> capability);
 
     public void invalidate() {
