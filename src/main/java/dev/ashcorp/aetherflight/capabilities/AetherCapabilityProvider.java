@@ -1,6 +1,5 @@
 package dev.ashcorp.aetherflight.capabilities;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -30,8 +29,6 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
             return new CompoundTag();
         } else {
             CompoundTag tag = new CompoundTag();
-            tag.putBoolean("firstJoin", capability.getFirstJoin());
-            tag.putLong("aetherSiphonLocation", capability.getAetherSiphonLocation().asLong());
             tag.putInt("aetherSiphonTier", capability.getAetherSiphonTier());
             tag.putInt("storedAether", capability.getStoredAether());
             return tag;
@@ -43,8 +40,6 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
 
         if (CapabilityManager.AETHER_PLAYER_CAPABILITY != null) {
             capability.setAetherSiphonTier(nbt.getInt("aetherSiphonTier"));
-            capability.setAetherSiphonLocation(BlockPos.of(nbt.getLong("aetherSiphonLocation")));
-            capability.setFirstJoin(nbt.getBoolean("firstJoin"));
             capability.setStoredAether(nbt.getInt("storedAether"));
         }
 
