@@ -53,6 +53,7 @@ public class Registration {
 
     public static final RegistryObject<Item> RAW_AETHER_CRYSTAL = ITEMS.register("raw_aether_crystal", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> REFINED_AETHER_CRYSTAL = ITEMS.register("refined_aether_crystal", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> AETHER_SIPHON = ITEMS.register("aether_siphon", () -> new Item(ITEM_PROPERTIES));
 
     public static final Tags.IOptionalNamedTag<Block> AETHER_ORE = BlockTags.createOptional(new ResourceLocation(MODID, "aether_ore"));
     public static final Tags.IOptionalNamedTag<Item> AETHER_ORE_ITEM = ItemTags.createOptional(new ResourceLocation(MODID, "aether_ore"));

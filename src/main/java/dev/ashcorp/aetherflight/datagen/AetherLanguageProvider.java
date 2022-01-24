@@ -17,5 +17,6 @@ public class AetherLanguageProvider extends net.minecraftforge.common.data.Langu
         add(Registration.AETHER_ORE_OVERWORLD.get(), "Aether Ore");
         add(Registration.RAW_AETHER_CRYSTAL.get(), "Raw Aether Crystal");
         add(Registration.REFINED_AETHER_CRYSTAL.get(), "Refined Aether Crystal");
+        add(Registration.AETHER_SIPHON.get(), "Aether Siphon");
     }
 }
