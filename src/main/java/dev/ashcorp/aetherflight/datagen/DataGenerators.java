@@ -1,6 +1,7 @@
 package dev.ashcorp.aetherflight.datagen;
 
 import dev.ashcorp.aetherflight.AetherFlight;
+import dev.ashcorp.aetherflight.blocks.AetherBlockStates;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +20,7 @@ public class DataGenerators {
             generator.addProvider(new AetherLootTables(generator));
         }
         if(event.includeClient()) {
+            generator.addProvider(new AetherBlockStates(generator, event.getExistingFileHelper()));
             generator.addProvider(new AetherItemModels(generator, event.getExistingFileHelper()));
             generator.addProvider(new AetherLanguageProvider(generator, "en_us"));
         }

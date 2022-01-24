@@ -25,7 +25,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
 
     @Override
     public CompoundTag serializeNBT() {
-        if (CapabilityManager.AETHER_PLAYER_CAPABILITY == null) {
+        if (CapabilityManager.AETHER_ITEM_CAPABILITY == null) {
             return new CompoundTag();
         } else {
             CompoundTag tag = new CompoundTag();
@@ -38,7 +38,7 @@ public class AetherCapabilityProvider implements ICapabilitySerializable<Compoun
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
-        if (CapabilityManager.AETHER_PLAYER_CAPABILITY != null) {
+        if (CapabilityManager.AETHER_ITEM_CAPABILITY != null) {
             capability.setAetherSiphonTier(nbt.getInt("aetherSiphonTier"));
             capability.setStoredAether(nbt.getInt("storedAether"));
         }

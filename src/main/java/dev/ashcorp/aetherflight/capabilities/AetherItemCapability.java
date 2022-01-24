@@ -42,7 +42,7 @@ public class AetherItemCapability implements IAether {
     }
 
     public void copyFrom(AetherItemCapability source) {
-        LOGGER.info("Copying player data...");
+        LOGGER.info("Copying item data...");
         aetherSiphonTier = source.aetherSiphonTier;
         storedAether = source.storedAether;
         maxAether = source.maxAether;
