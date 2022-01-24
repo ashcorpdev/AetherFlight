@@ -1,8 +1,5 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.blocks.AetherSiphonBlock;
-import dev.ashcorp.aetherflight.blocks.AetherSiphonBlockEntity;
-import dev.ashcorp.aetherflight.blocks.AetherSiphonContainer;
 import dev.ashcorp.aetherflight.capabilities.AetherPlayerCapability;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -16,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -60,11 +56,6 @@ public class Registration {
 
     public static final Tags.IOptionalNamedTag<Block> AETHER_ORE = BlockTags.createOptional(new ResourceLocation(MODID, "aether_ore"));
     public static final Tags.IOptionalNamedTag<Item> AETHER_ORE_ITEM = ItemTags.createOptional(new ResourceLocation(MODID, "aether_ore"));
-
-    public static final RegistryObject<AetherSiphonBlock> AETHERSIPHON = BLOCKS.register("aethersiphon", AetherSiphonBlock::new);
-    public static final RegistryObject<Item> AETHERSIPHON_ITEM = fromBlock(AETHERSIPHON);
-    public static final RegistryObject<BlockEntityType<AetherSiphonBlockEntity>> AETHERSIPHON_BE = BLOCK_ENTITIES.register("aethersiphon", () -> BlockEntityType.Builder.of(AetherSiphonBlockEntity::new, AETHERSIPHON.get()).build(null));
-    public static final RegistryObject<MenuType<AetherSiphonContainer>> AETHERSIPHON_CONTAINER = CONTAINERS.register("aethersiphon", () -> IForgeMenuType.create((windowId, inv, data) -> new AetherSiphonContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
 
     // Convenience function to get the corresponding RegistryObject<Item> from a RegistryObject<Block>.

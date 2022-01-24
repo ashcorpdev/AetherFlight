@@ -17,12 +17,8 @@ public class DataGenerators {
         if(event.includeServer()) {
             generator.addProvider(new AetherRecipes(generator));
             generator.addProvider(new AetherLootTables(generator));
-            AetherBlockTags blockTags = new AetherBlockTags(generator, event.getExistingFileHelper());
-            generator.addProvider(blockTags);
-            generator.addProvider(new AetherItemTags(generator, blockTags, event.getExistingFileHelper()));
         }
         if(event.includeClient()) {
-            generator.addProvider(new AetherBlockStates(generator, event.getExistingFileHelper()));
             generator.addProvider(new AetherItemModels(generator, event.getExistingFileHelper()));
             generator.addProvider(new AetherLanguageProvider(generator, "en_us"));
         }

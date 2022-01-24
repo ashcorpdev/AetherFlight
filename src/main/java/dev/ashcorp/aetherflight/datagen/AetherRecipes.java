@@ -29,16 +29,5 @@ public class AetherRecipes extends RecipeProvider {
                 Registration.REFINED_AETHER_CRYSTAL.get(), 0.0f, 100)
                 .unlockedBy("has_chunk", has(Registration.RAW_AETHER_CRYSTAL.get()))
                 .save(consumer, "aether_crystal2");
-
-        ShapedRecipeBuilder.shaped(Registration.AETHERSIPHON.get())
-                .pattern("mmm")
-                .pattern("x#x")
-                .pattern("#x#")
-                .define('x', Tags.Items.DUSTS_REDSTONE)
-                .define('#', Tags.Items.INGOTS_IRON)
-                .define('m', Registration.REFINED_AETHER_CRYSTAL.get())
-                .group("assets/aetherflight")
-                .unlockedBy("aether", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.REFINED_AETHER_CRYSTAL.get()))
-                .save(consumer);
     }
 }
