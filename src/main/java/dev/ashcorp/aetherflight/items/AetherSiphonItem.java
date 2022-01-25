@@ -4,25 +4,15 @@ import dev.ashcorp.aetherflight.lib.Helpers;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.text.AttributeSet;
-import javax.swing.text.Style;
 import java.util.List;
 import java.util.UUID;
-
-import static dev.ashcorp.aetherflight.setup.ModSetup.ITEM_GROUP;
 
 public class AetherSiphonItem extends Item {
 
