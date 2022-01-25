@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -30,26 +31,6 @@ public class RuntimeEvents {
     }
 
     @SubscribeEvent
-    public static void interactEvent(PlayerInteractEvent.RightClickItem event) {
-            ItemStack item = event.getItemStack();
-            if (item.getItem() instanceof AetherSiphonItem siphonItem) {
-                UUID owner = siphonItem.getOwner();
-
-                if (owner == null) {
-                    siphonItem.setOwner(event.getEntityLiving().getUUID());
-                } else if (siphonItem.getOwner() != null && event.getEntityLiving().getUUID() != siphonItem.getOwner()) {
-                    // Entity trying to use the item isn't the item owner.
-                    LOGGER.info("User is not the item owner");
-                } else {
-                    // Do the things.
-                    int stored = siphonItem.getStoredAether();
-                    siphonItem.setStoredAether(stored + 10);
-                }
-            }
-        }
-
-
-    @SubscribeEvent
     public static void playerTickEvent(TickEvent.PlayerTickEvent event) {
 
         Player player = event.player;
@@ -69,6 +50,30 @@ public class RuntimeEvents {
 
     }
 
-    private static void addTierEffects(LivingEntity player, int tier) {
-}
+    @SubscribeEvent
+    public static void onPlayerInteract(PlayerInteractEvent.RightClickItem event) {
+
+        ItemStack stack = event.getItemStack();
+
+        LOGGER.info("InteractEvent Fired");
+
+            String owner = stack.getTag().getString("owner");
+            if(!owner.equals(event.getEntityLiving().getUUID().toString()) && !owner.isEmpty()) {
+                LOGGER.info("Not the owner!");
+                return;
+            } else if(!owner.equals(event.getEntityLiving().getUUID().toString())) {
+                // Set the owner.
+                stack.getTag().putString("owner", event.getEntityLiving().getUUID().toString());
+                stack.getTag().putInt("tier", 1);
+                stack.getTag().putInt("storedAether", 0);
+                stack.getTag().putInt("maxAether", 5000);
+                LOGGER.info(String.format("Stack Owner Updated: %s", owner));
+            }
+
+            int aether = stack.getTag().getInt("storedAether");
+            aether += 10;
+
+            stack.getTag().putInt("storedAether", aether);
+            LOGGER.info(String.format("Set aether to %s", aether));
+    }
 }

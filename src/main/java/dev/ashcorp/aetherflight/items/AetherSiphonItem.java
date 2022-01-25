@@ -1,19 +1,24 @@
 package dev.ashcorp.aetherflight.items;
 
+import dev.ashcorp.aetherflight.lib.Helpers;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.text.AttributeSet;
+import javax.swing.text.Style;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,56 +28,58 @@ public class AetherSiphonItem extends Item {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private int tier = 0;
-    private int storedAether = 0;
-    private int maxAether = 5000;
-    private UUID owner = null;
-
     public AetherSiphonItem(Properties pProperties) {
         super(pProperties);
         pProperties.setNoRepair();
-        pProperties.tab(ITEM_GROUP);
         pProperties.rarity(Rarity.COMMON);
         pProperties.stacksTo(1);
     }
 
+
+
+    @Override
+    public void onCraftedBy(ItemStack pStack, Level pLevel, Player pPlayer) {
+
+        int tier = pStack.getOrCreateTag().getInt("tier");
+        int storedAether = pStack.getOrCreateTag().getInt("storedAether");
+        int maxAether = pStack.getOrCreateTag().getInt("maxAether");
+        String owner = pStack.getOrCreateTag().getString("owner");
+        super.onCraftedBy(pStack, pLevel, pPlayer);
+
+    }
+
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(new TextComponent(String.format("Tier: %s", tier)));
-        pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", getStoredAether(), getMaxAether())));
+
+        if(pStack.getTag() != null) {
+            if(!pStack.getTag().getString("owner").isEmpty()) {
+
+                UUID uuid = UUID.fromString(pStack.getTag().getString("owner"));
+                Player player = Helpers.getPlayerFromUUID(uuid);
+
+                pTooltipComponents.add(new TextComponent(String.format("Tier: %s", pStack.getTag().getInt("tier"))));
+                pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether"))));
+                pTooltipComponents.add(new TextComponent(String.format("Owner: %s", player.getDisplayName().getString())));
+            } else {
+                pTooltipComponents.add(new TextComponent("Right-click to bind!"));
+            }
+        }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
     }
 
-    public int getTier() {
-        return this.tier;
+
+    @Override
+    public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
+        ItemStack stack = new ItemStack(this);
+
+        int tier = stack.getOrCreateTag().getInt("tier");
+        int storedAether = stack.getOrCreateTag().getInt("storedAether");
+        int maxAether = stack.getOrCreateTag().getInt("maxAether");
+        String owner = stack.getOrCreateTag().getString("owner");
+        pItems.add(stack);
+        super.fillItemCategory(pCategory, pItems);
+
     }
 
-    public void setTier(int tier) {
-        this.tier = tier;
-    }
-
-    public int getStoredAether() {
-        return this.storedAether;
-    }
-
-    public void setStoredAether(int storedAether) {
-        this.storedAether = storedAether;
-    }
-
-    public int getMaxAether() {
-        return this.maxAether;
-    }
-
-    public void setMaxAether(int maxAether) {
-        this.maxAether = maxAether;
-    }
-
-    public UUID getOwner() {
-        return this.owner;
-    }
-
-    public void setOwner(UUID owner) {
-        this.owner = owner;
-    }
 }
