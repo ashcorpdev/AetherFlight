@@ -63,11 +63,22 @@ public class AetherSiphonItem extends Item {
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
         ItemStack stack = new ItemStack(this);
 
-        int tier = stack.getOrCreateTag().getInt("tier");
-        int storedAether = stack.getOrCreateTag().getInt("storedAether");
-        int maxAether = stack.getOrCreateTag().getInt("maxAether");
-        String owner = stack.getOrCreateTag().getString("owner");
-        pItems.add(stack);
+        // Filter out the existing item in creative menu and replace with the custom one?
+
+        int i = 0;
+        for (ItemStack item : pItems
+             ) {
+            i++;
+            if (item.getItem() instanceof AetherSiphonItem && i < pItems.size()) {
+                pItems.remove(i);
+                int tier = stack.getOrCreateTag().getInt("tier");
+                int storedAether = stack.getOrCreateTag().getInt("storedAether");
+                int maxAether = stack.getOrCreateTag().getInt("maxAether");
+                String owner = stack.getOrCreateTag().getString("owner");
+                pItems.add(stack);
+            }
+        }
+
         super.fillItemCategory(pCategory, pItems);
 
     }
