@@ -37,24 +37,9 @@ public class AetherSiphonItem extends Item {
     }
 
     @Override
-    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-        if (this.owner == null) {
-            setOwner(pLivingEntity.getUUID());
-        } else if (getOwner() != null && pLivingEntity.getUUID() != getOwner()) {
-            // Entity trying to use the item isn't the item owner.
-            LOGGER.info("User is not the item owner");
-        } else {
-            // Do the things.
-            int stored = getStoredAether();
-            setStoredAether(stored + 10);
-        }
-        super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
-    }
-
-    @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(new TextComponent(String.format("Tier: %s", tier)));
-        pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", storedAether, maxAether)));
+        pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", getStoredAether(), getMaxAether())));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
     }
