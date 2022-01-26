@@ -2,8 +2,8 @@ package dev.ashcorp.aetherflight.events;
 
 import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import dev.ashcorp.aetherflight.setup.Registration;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -17,8 +17,9 @@ import org.apache.logging.log4j.Logger;
 public class RuntimeEvents {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private static int checkFlightAllowed = 20;
+    private static int flightCheckTimer = 20;
     private static boolean isFlying = false;
+    private static boolean canFly = false;
 
     @SubscribeEvent
     public static void onPlayerCloneEvent(PlayerEvent.Clone event) {
@@ -28,75 +29,70 @@ public class RuntimeEvents {
     @SubscribeEvent
     public static void playerTickEvent(TickEvent.PlayerTickEvent event) {
 
-        if (checkFlightAllowed <= 0) {
+        Player player = event.player;
+
+        if (flightCheckTimer <= 0) {
             isFlying = event.player.getAbilities().flying;
+        } else {
+            flightCheckTimer--;
         }
 
+        if (event.player instanceof ServerPlayer) {
 
-        Player player = event.player;
-        ItemStack siphon = new ItemStack(Registration.AETHER_SIPHON.get().asItem());
-        int itemSlot;
-        ItemStack stack;
-        LOGGER.info(String.format("Is flying? %b", isFlying));
-        LOGGER.info(String.format("Flight counter: %s", checkFlightAllowed));
+            ItemStack siphon = new ItemStack(Registration.AETHER_SIPHON.get().asItem());
+            int itemSlot;
+            ItemStack stack;
 
-        for (ItemStack item : event.player.getInventory().items) {
+            for (ItemStack item : event.player.getInventory().items) {
 
-            if(item.getItem() instanceof AetherSiphonItem) {
+                if (item.getItem() instanceof AetherSiphonItem) {
 
-                itemSlot = player.getInventory().findSlotMatchingItem(item);
-                stack = player.getInventory().getItem(itemSlot);
+                    // If the player has the item in their inventory, find it.
 
-                // Player has an aether siphon.
-                int amount = player.getInventory().countItem(siphon.getItem());
+                    itemSlot = player.getInventory().findSlotMatchingItem(item);
+                    stack = player.getInventory().getItem(itemSlot);
 
-                if(amount > 1) {
-                    // Player has more than one aether siphon.
-                    LOGGER.info("Player has more than one aether siphon. Not working.");
-                    player.getAbilities().mayfly = false;
-                    player.onUpdateAbilities();
-                } else {
+                    // Player has an aether siphon.
+                    int amount = player.getInventory().countItem(siphon.getItem());
 
-                    // Allow the player to fly.
-                    if (checkFlightAllowed <= 0) {
-
-                        player.getAbilities().mayfly = true;
+                    if (amount > 1) {
+                        // Player has more than one aether siphon.
+                        LOGGER.info("Player has more than one aether siphon. Not working.");
+                        player.getAbilities().mayfly = false;
                         player.onUpdateAbilities();
+                        canFly = false;
+                    } else if (stack.getTag() != null) {
 
-                        checkFlightAllowed = 20;
+                        if(stack.getTag().getInt("storedAether") > 0) {
+                            canFly = true;
+                            stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") - 1);
 
-                    } else {
-                        checkFlightAllowed--;
-                    }
-
-                    if (isFlying) {
-                        // If the player is in the air, we don't want them gaining aether.
-
-                        if (stack.getTag() != null) {
-                            int storedAether = player.getInventory().getItem(itemSlot).getTag().getInt("storedAether");
-                            int tier = player.getInventory().getItem(itemSlot).getTag().getInt("tier");
-
-                            int newAether = storedAether - 10;
-                            stack.getTag().putInt("storedAether", newAether);
-                            LOGGER.info(String.format("Stored Aether: %s", player.getInventory().getItem(itemSlot).getTag().getInt("storedAether")));
-
-                        }
-                    } else {
-                        if (stack.getTag() != null) {
-                            int storedAether = player.getInventory().getItem(itemSlot).getTag().getInt("storedAether");
-                            int tier = player.getInventory().getItem(itemSlot).getTag().getInt("tier");
-
-                            int newAether = storedAether + 20;
-                            if(checkFlightAllowed <= 0) {
-                                stack.getTag().putInt("storedAether", newAether);
-                            }
-                            LOGGER.info(String.format("Stored Aether: %s", player.getInventory().getItem(itemSlot).getTag().getInt("storedAether")));
+                        } else if (stack.getTag().getInt("storedAether") <= 0){
+                            stack.getTag().putInt("storedAether", 0);
+                            canFly = false;
+                            player.getAbilities().flying = false;
+                            player.onUpdateAbilities();
                         }
                     }
 
+                    if(stack.getTag() != null) {
+                        if (!isFlying && stack.getTag().getInt("storedAether") < stack.getTag().getInt("maxAether")) {
+                            stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") + 2);
+                        } else if(!isFlying && stack.getTag().getInt("storedAether") >= stack.getTag().getInt("maxAether")) {
+                            stack.getTag().putInt("storedAether", stack.getTag().getInt("maxAether"));
+                        }
+                    }
 
                 }
             }
+
+            if (isFlying && !canFly) {
+                    player.getAbilities().flying = false;
+                    player.onUpdateAbilities();
+            }
+
+            player.getAbilities().mayfly = canFly;
+            player.onUpdateAbilities();
 
 
         }
