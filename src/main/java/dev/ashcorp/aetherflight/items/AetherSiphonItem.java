@@ -41,6 +41,8 @@ public class AetherSiphonItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
+        //TODO: Convert all text to TranslatableComponent instead of TextComponent and use lang files.
+
         if(pStack.getTag() != null) {
             if(!pStack.getTag().getString("owner").isEmpty()) {
 
