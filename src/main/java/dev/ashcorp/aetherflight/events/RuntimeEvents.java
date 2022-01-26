@@ -20,6 +20,7 @@ public class RuntimeEvents {
     private static int flightCheckTimer = 20;
     private static boolean isFlying = false;
     private static boolean canFly = false;
+    //INFO: 1000 max aether = 25s of flight;
 
     @SubscribeEvent
     public static void onPlayerCloneEvent(PlayerEvent.Clone event) {
@@ -37,7 +38,7 @@ public class RuntimeEvents {
             flightCheckTimer--;
         }
 
-        if (event.player instanceof ServerPlayer) {
+        if (event.player instanceof ServerPlayer && !event.player.isCreative()) {
 
             ItemStack siphon = new ItemStack(Registration.AETHER_SIPHON.get().asItem());
             int itemSlot;
@@ -61,38 +62,43 @@ public class RuntimeEvents {
                         player.getAbilities().mayfly = false;
                         player.onUpdateAbilities();
                         canFly = false;
+
                     } else if (stack.getTag() != null) {
 
+                        // Has aether, can fly.
                         if(stack.getTag().getInt("storedAether") > 0) {
                             canFly = true;
                             stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") - 1);
 
                         } else if (stack.getTag().getInt("storedAether") <= 0){
-                            stack.getTag().putInt("storedAether", 0);
+                            // Has negative aether.
+                            //stack.getTag().putInt("storedAether", 0);
                             canFly = false;
-                            player.getAbilities().flying = false;
-                            player.onUpdateAbilities();
                         }
                     }
 
                     if(stack.getTag() != null) {
-                        if (!isFlying && stack.getTag().getInt("storedAether") < stack.getTag().getInt("maxAether")) {
-                            stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") + 2);
+                        if (!isFlying && stack.getTag().getInt("storedAether") <= stack.getTag().getInt("maxAether")) {
+
+
+                                stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") + 2);
+
                         } else if(!isFlying && stack.getTag().getInt("storedAether") >= stack.getTag().getInt("maxAether")) {
                             stack.getTag().putInt("storedAether", stack.getTag().getInt("maxAether"));
                         }
-                    }
 
+
+                        if(stack.getTag().getInt("storedAether") <= 0 && isFlying) {
+                            canFly = false;
+                            player.getAbilities().flying = false;
+                            player.onUpdateAbilities();
+                        }
+
+                        player.getAbilities().mayfly = canFly;
+                        player.onUpdateAbilities();
+                    }
                 }
             }
-
-            if (isFlying && !canFly) {
-                    player.getAbilities().flying = false;
-                    player.onUpdateAbilities();
-            }
-
-            player.getAbilities().mayfly = canFly;
-            player.onUpdateAbilities();
 
 
         }
@@ -125,7 +131,7 @@ public class RuntimeEvents {
                 stack.getTag().putString("owner", event.getEntityLiving().getUUID().toString());
                 stack.getTag().putInt("tier", 1);
                 stack.getTag().putInt("storedAether", 0);
-                stack.getTag().putInt("maxAether", 5000);
+                stack.getTag().putInt("maxAether", 1000);
                 LOGGER.info(String.format("Stack Owner Updated: %s", owner));
             }
             LOGGER.info("Interaction finished");
