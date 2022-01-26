@@ -48,6 +48,16 @@ public class RuntimeEvents {
 
         LOGGER.info("InteractEvent Fired");
 
+            if(stack.getTag() == null) {
+
+                // Check if the item has no tag for some reason - this should resolve this.
+
+                int tier = stack.getOrCreateTag().getInt("tier");
+                int storedAether = stack.getOrCreateTag().getInt("storedAether");
+                int maxAether = stack.getOrCreateTag().getInt("maxAether");
+                String owner = stack.getOrCreateTag().getString("owner");
+            }
+
             String owner = stack.getTag().getString("owner");
             if(!owner.equals(event.getEntityLiving().getUUID().toString()) && !owner.isEmpty()) {
                 LOGGER.info("Not the owner!");

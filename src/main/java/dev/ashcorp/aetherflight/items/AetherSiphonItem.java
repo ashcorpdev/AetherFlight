@@ -53,6 +53,8 @@ public class AetherSiphonItem extends Item {
             } else {
                 pTooltipComponents.add(new TextComponent("Right-click to bind!"));
             }
+        } else {
+            pTooltipComponents.add(new TextComponent("Right-click to bind!"));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
@@ -61,25 +63,10 @@ public class AetherSiphonItem extends Item {
 
     @Override
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
-        ItemStack stack = new ItemStack(this);
 
-        // Filter out the existing item in creative menu and replace with the custom one?
-
-        int i = 0;
-        for (ItemStack item : pItems
-             ) {
-            i++;
-            if (item.getItem() instanceof AetherSiphonItem && i < pItems.size()) {
-                pItems.remove(i);
-                int tier = stack.getOrCreateTag().getInt("tier");
-                int storedAether = stack.getOrCreateTag().getInt("storedAether");
-                int maxAether = stack.getOrCreateTag().getInt("maxAether");
-                String owner = stack.getOrCreateTag().getString("owner");
-                pItems.add(stack);
-            }
+        if(this.allowdedIn(pCategory)) {
+            pItems.add(new ItemStack(this));
         }
-
-        super.fillItemCategory(pCategory, pItems);
 
     }
 
