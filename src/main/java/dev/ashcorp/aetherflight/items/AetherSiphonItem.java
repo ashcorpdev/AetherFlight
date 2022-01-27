@@ -18,6 +18,8 @@ import java.util.UUID;
 public class AetherSiphonItem extends Item {
 
     private static final Logger LOGGER = LogManager.getLogger();
+
+    //TODO: Replace these static variables with an actual configuration file to adjust.
     private static int costTimer = 20;
     private int i;
     private int j;
@@ -48,7 +50,7 @@ public class AetherSiphonItem extends Item {
                 if(pStack.getTag().getInt("storedAether") <= flightCost && flightCost != 0) {
                     stopFlying(player);
                     // We give the player 5 aether to kickstart the recharging. Otherwise player cannot fly anymore.
-                    j += 5;
+                    j += flightGain;
                 }
 
                 if(player.getAbilities().mayfly && player.getAbilities().flying && pStack.getTag().getInt("storedAether") > flightCost) {
