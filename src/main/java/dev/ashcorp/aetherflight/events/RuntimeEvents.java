@@ -30,78 +30,7 @@ public class RuntimeEvents {
     @SubscribeEvent
     public static void playerTickEvent(TickEvent.PlayerTickEvent event) {
 
-        Player player = event.player;
 
-        if (flightCheckTimer <= 0) {
-            isFlying = event.player.getAbilities().flying;
-        } else {
-            flightCheckTimer--;
-        }
-
-        if (event.player instanceof ServerPlayer && !event.player.isCreative()) {
-
-            ItemStack siphon = new ItemStack(Registration.AETHER_SIPHON.get().asItem());
-            int itemSlot;
-            ItemStack stack;
-
-            for (ItemStack item : event.player.getInventory().items) {
-
-                if (item.getItem() instanceof AetherSiphonItem) {
-
-                    // If the player has the item in their inventory, find it.
-
-                    itemSlot = player.getInventory().findSlotMatchingItem(item);
-                    stack = player.getInventory().getItem(itemSlot);
-
-                    // Player has an aether siphon.
-                    int amount = player.getInventory().countItem(siphon.getItem());
-
-                    if (amount > 1) {
-                        // Player has more than one aether siphon.
-                        LOGGER.info("Player has more than one aether siphon. Not working.");
-                        player.getAbilities().mayfly = false;
-                        player.onUpdateAbilities();
-                        canFly = false;
-
-                    } else if (stack.getTag() != null) {
-
-                        // Has aether, can fly.
-                        if(stack.getTag().getInt("storedAether") > 0) {
-                            canFly = true;
-                            stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") - 1);
-
-                        } else if (stack.getTag().getInt("storedAether") <= 0){
-                            // Has negative aether.
-                            //stack.getTag().putInt("storedAether", 0);
-                            canFly = false;
-                        }
-                    }
-
-                    if(stack.getTag() != null) {
-                        if (!isFlying && stack.getTag().getInt("storedAether") <= stack.getTag().getInt("maxAether")) {
-
-
-                                stack.getTag().putInt("storedAether", stack.getTag().getInt("storedAether") + 2);
-
-                        } else if(!isFlying && stack.getTag().getInt("storedAether") >= stack.getTag().getInt("maxAether")) {
-                            stack.getTag().putInt("storedAether", stack.getTag().getInt("maxAether"));
-                        }
-
-
-                        if(stack.getTag().getInt("storedAether") <= 0 && isFlying) {
-                            canFly = false;
-                            player.getAbilities().flying = false;
-                            player.onUpdateAbilities();
-                        }
-
-                        player.getAbilities().mayfly = canFly;
-                        player.onUpdateAbilities();
-                    }
-                }
-            }
-
-
-        }
 
     }
 
