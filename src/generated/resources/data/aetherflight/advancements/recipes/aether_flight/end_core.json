@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "aetherflight:end_core"
+    ]
+  },
+  "criteria": {
+    "netherCore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aetherflight:end_core"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "aetherflight:end_core"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "netherCore",
+      "has_the_recipe"
+    ]
+  ]
+}

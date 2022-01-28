@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "aetherflight",
+  "pattern": [
+    " x ",
+    "x x",
+    " x "
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "aetherflight:nether_core"
+  }
+}

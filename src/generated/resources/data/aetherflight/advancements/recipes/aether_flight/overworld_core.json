@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "aetherflight:overworld_core"
+    ]
+  },
+  "criteria": {
+    "refinedAetherCrystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aetherflight:refined_aether_crystal"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "aetherflight:overworld_core"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "refinedAetherCrystal",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "aetherflight",
+  "pattern": [
+    "mcm",
+    "x x",
+    " x "
+  ],
+  "key": {
+    "c": {
+      "item": "aetherflight:overworld_core"
+    },
+    "x": {
+      "tag": "forge:ingots/gold"
+    },
+    "m": {
+      "item": "aetherflight:refined_aether_crystal"
+    }
+  },
+  "result": {
+    "item": "aetherflight:aether_siphon"
+  }
+}

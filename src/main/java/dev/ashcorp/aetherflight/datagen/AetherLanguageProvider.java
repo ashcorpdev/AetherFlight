@@ -18,6 +18,9 @@ public class AetherLanguageProvider extends net.minecraftforge.common.data.Langu
         add(Registration.AETHER_ORE_OVERWORLD.get(), "Aether Ore");
         add(Registration.RAW_AETHER_CRYSTAL.get(), "Raw Aether Crystal");
         add(Registration.REFINED_AETHER_CRYSTAL.get(), "Refined Aether Crystal");
+        add(Registration.OVERWORLD_CORE.get(), "Overworld Core");
+        add(Registration.NETHER_CORE.get(), "Nether Core");
+        add(Registration.END_CORE.get(), "End Core");
         add(Registration.AETHER_SIPHON.get(), "Aether Siphon");
         add("item.aetherflight.aether_siphon.tier", "Tier: %1$s");
         add("item.aetherflight.aether_siphon.owner", "Owner: %1$s");

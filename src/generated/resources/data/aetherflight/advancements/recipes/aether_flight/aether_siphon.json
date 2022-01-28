@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "aetherflight:aether_siphon"
+    ]
+  },
+  "criteria": {
+    "refinedAetherCrystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aetherflight:refined_aether_crystal"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "aetherflight:aether_siphon"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "refinedAetherCrystal",
+      "has_the_recipe"
+    ]
+  ]
+}
