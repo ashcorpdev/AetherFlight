@@ -1,9 +1,11 @@
 package dev.ashcorp.aetherflight.items;
 
 import dev.ashcorp.aetherflight.lib.Helpers;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -109,9 +111,11 @@ public class AetherSiphonItem extends Item {
                 UUID uuid = UUID.fromString(pStack.getTag().getString("owner"));
                 Player player = Helpers.getPlayerFromUUID(uuid);
 
-                pTooltipComponents.add(new TextComponent(String.format("Tier: %s", pStack.getTag().getInt("tier"))));
-                pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether"))));
-                pTooltipComponents.add(new TextComponent(String.format("Owner: %s", player.getDisplayName().getString())));
+                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.tier", pStack.getTag().getInt("tier")).withStyle(ChatFormatting.AQUA));
+                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.storedAether", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether")).withStyle(ChatFormatting.GREEN));
+                //pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether"))));
+
+                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.owner", pLevel.getPlayerByUUID(UUID.fromString(pStack.getTag().getString("owner"))).getDisplayName().getString()).withStyle(ChatFormatting.GOLD));
             } else {
                 pTooltipComponents.add(new TextComponent("Right-click to bind!"));
             }

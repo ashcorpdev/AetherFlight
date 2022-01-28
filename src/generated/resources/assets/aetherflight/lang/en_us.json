@@ -3,5 +3,8 @@
   "item.aetherflight.aether_siphon": "Aether Siphon",
   "item.aetherflight.raw_aether_crystal": "Raw Aether Crystal",
   "item.aetherflight.refined_aether_crystal": "Refined Aether Crystal",
-  "itemGroup.aether_flight": "Aether Flight"
+  "itemGroup.aether_flight": "Aether Flight",
+  "item.aetherflight.aether_siphon.tier": "Tier: %1$s",
+  "item.aetherflight.aether_siphon.owner": "Owner: %1$s",
+  "item.aetherflight.aether_siphon.storedAether": "Stored Aether: %1$s / %2$s"
 }
