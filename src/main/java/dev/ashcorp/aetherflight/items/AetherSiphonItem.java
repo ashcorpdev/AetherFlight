@@ -150,5 +150,11 @@ public class AetherSiphonItem extends Item {
             player.onUpdateAbilities();
         }
     }
+
+    @Override
+    public boolean onDroppedByPlayer(ItemStack item, Player player) {
+        stopFlying(player);
+        return super.onDroppedByPlayer(item, player);
+    }
 }
 
