@@ -40,9 +40,14 @@ public class AetherSiphonItem extends Item {
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
-
         if (pEntity instanceof Player player) {
             LOGGER.info(String.format("TICK! Can fly: %s, Is flying: %s, costTimer: %s, gainTimer: %s", player.getAbilities().mayfly, player.getAbilities().flying, i, j));
+
+
+            if(player.getInventory().countItem(pStack.getItem()) > 1) {
+                stopFlying(player);
+                return;
+            }
 
             if(pStack.getTag() != null) {
 
