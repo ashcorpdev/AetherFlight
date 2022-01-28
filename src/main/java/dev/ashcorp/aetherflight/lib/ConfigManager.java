@@ -1,6 +1,5 @@
 package dev.ashcorp.aetherflight.lib;
 
-import dev.ashcorp.aetherflight.AetherFlight;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,9 +11,30 @@ import static dev.ashcorp.aetherflight.AetherFlight.LOGGER;
 @Mod.EventBusSubscriber
 public class ConfigManager {
 
-    public static class ClientConfig {}
+    public static final ForgeConfigSpec serverForgeSpec;
+    public static final ServerConfig SERVER_CONFIG;
 
-    public static class CommonConfig {}
+    static {
+        final Pair<ServerConfig, ForgeConfigSpec> serverForgeSpecPair = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
+        serverForgeSpec = serverForgeSpecPair.getRight();
+        SERVER_CONFIG = serverForgeSpecPair.getLeft();
+    }
+
+    @SubscribeEvent
+    public static void onLoad(final ModConfigEvent.Loading configEvent) {
+        LOGGER.debug("Loaded the aether flight configuration file! {}", configEvent.getConfig().getFileName());
+    }
+
+    @SubscribeEvent
+    public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
+        LOGGER.fatal("Aether flight configuration changed!");
+    }
+
+    public static class ClientConfig {
+    }
+
+    public static class CommonConfig {
+    }
 
     public static class ServerConfig {
 
@@ -44,24 +64,5 @@ public class ConfigManager {
             builder.pop();
 
         }
-    }
-
-    public static final ForgeConfigSpec serverForgeSpec;
-    public static final ServerConfig SERVER_CONFIG;
-
-    static {
-        final Pair<ServerConfig, ForgeConfigSpec> serverForgeSpecPair = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
-        serverForgeSpec = serverForgeSpecPair.getRight();
-        SERVER_CONFIG = serverForgeSpecPair.getLeft();
-    }
-
-    @SubscribeEvent
-    public static void onLoad(final ModConfigEvent.Loading configEvent) {
-        LOGGER.debug("Loaded the aether flight configuration file! {}", configEvent.getConfig().getFileName());
-    }
-
-    @SubscribeEvent
-    public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
-        LOGGER.fatal("Aether flight configuration changed!");
     }
 }

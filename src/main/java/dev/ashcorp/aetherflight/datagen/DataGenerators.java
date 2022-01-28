@@ -15,11 +15,11 @@ public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
-        if(event.includeServer()) {
+        if (event.includeServer()) {
             generator.addProvider(new AetherRecipes(generator));
             generator.addProvider(new AetherLootTables(generator));
         }
-        if(event.includeClient()) {
+        if (event.includeClient()) {
             generator.addProvider(new AetherBlockStates(generator, event.getExistingFileHelper()));
             generator.addProvider(new AetherItemModels(generator, event.getExistingFileHelper()));
             generator.addProvider(new AetherLanguageProvider(generator, "en_us"));

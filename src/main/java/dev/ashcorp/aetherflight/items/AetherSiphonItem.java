@@ -12,21 +12,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
 public class AetherSiphonItem extends Item {
-
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    //TODO: Replace these static variables with an actual configuration file to adjust.
     private int i;
     private int j;
-    //INFO: 1000 max aether = 25s of flight;
 
     public AetherSiphonItem(Properties pProperties) {
         super(pProperties);
@@ -35,33 +28,48 @@ public class AetherSiphonItem extends Item {
         pProperties.stacksTo(1);
     }
 
+    private static void startFlying(Player player) {
+        if (!player.isCreative() && !player.isSpectator()) {
+            player.getAbilities().mayfly = true;
+            player.onUpdateAbilities();
+        }
+    }
+
+    private static void stopFlying(Player player) {
+        if (!player.isCreative() && !player.isSpectator()) {
+            player.getAbilities().mayfly = false;
+            player.getAbilities().flying = false;
+            player.onUpdateAbilities();
+        }
+    }
+
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
         if (pEntity instanceof Player player) {
 
-            if(player.getInventory().countItem(pStack.getItem()) > 1) {
+            if (player.getInventory().countItem(pStack.getItem()) > 1) {
                 stopFlying(player);
-                if(player instanceof LocalPlayer)
+                if (player instanceof LocalPlayer)
                     player.displayClientMessage(new TranslatableComponent("item.aetherflight.aether_siphon.conflict").withStyle(ChatFormatting.RED), true);
                 return;
             }
 
-            if(pStack.getTag() != null) {
+            if (pStack.getTag() != null) {
 
-                if(!player.getAbilities().mayfly && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get()) {
+                if (!player.getAbilities().mayfly && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get()) {
                     startFlying(player);
                 }
-                if(pStack.getTag().getInt("storedAether") <= ConfigManager.ServerConfig.flightCost.get() && ConfigManager.ServerConfig.flightCost.get() != 0) {
+                if (pStack.getTag().getInt("storedAether") <= ConfigManager.ServerConfig.flightCost.get() && ConfigManager.ServerConfig.flightCost.get() != 0) {
                     stopFlying(player);
                     // We give the player 5 aether to kickstart the recharging. Otherwise player cannot fly anymore.
                     j += ConfigManager.ServerConfig.flightGain.get();
                 }
 
-                if(player.getAbilities().mayfly && player.getAbilities().flying && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get()) {
+                if (player.getAbilities().mayfly && player.getAbilities().flying && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get()) {
                     i++;
                     j = 0;
-                    if(i >= ConfigManager.ServerConfig.costTimer.get()) {
+                    if (i >= ConfigManager.ServerConfig.costTimer.get()) {
                         int oldAether = pStack.getTag().getInt("storedAether");
                         int newAether = oldAether - ConfigManager.ServerConfig.flightCost.get();
                         pStack.getTag().putInt("storedAether", newAether);
@@ -69,10 +77,10 @@ public class AetherSiphonItem extends Item {
                     }
                 }
 
-                if(!player.getAbilities().flying) {
+                if (!player.getAbilities().flying) {
                     i = 0;
                     j++;
-                    if(j >= ConfigManager.ServerConfig.gainTimer.get()) {
+                    if (j >= ConfigManager.ServerConfig.gainTimer.get()) {
 
                         int oldAether = pStack.getTag().getInt("storedAether");
                         int newAether = oldAether + ConfigManager.ServerConfig.flightGain.get();
@@ -90,7 +98,6 @@ public class AetherSiphonItem extends Item {
 
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
-
 
     @Override
     public void onCraftedBy(ItemStack pStack, Level pLevel, Player pPlayer) {
@@ -126,7 +133,6 @@ public class AetherSiphonItem extends Item {
 
     }
 
-
     @Override
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
 
@@ -134,21 +140,6 @@ public class AetherSiphonItem extends Item {
             pItems.add(new ItemStack(this));
         }
 
-    }
-
-    private static void startFlying(Player player) {
-        if(!player.isCreative() && !player.isSpectator()) {
-            player.getAbilities().mayfly = true;
-            player.onUpdateAbilities();
-        }
-    }
-
-    private static void stopFlying(Player player) {
-        if(!player.isCreative() && !player.isSpectator()) {
-            player.getAbilities().mayfly = false;
-            player.getAbilities().flying = false;
-            player.onUpdateAbilities();
-        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package dev.ashcorp.aetherflight.datagen;
 import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.data.DataGenerator;
+
 import static dev.ashcorp.aetherflight.setup.ModSetup.TAB_NAME;
 
 public class AetherLanguageProvider extends net.minecraftforge.common.data.LanguageProvider {

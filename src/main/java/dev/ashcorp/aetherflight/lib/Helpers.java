@@ -25,9 +25,7 @@ public class Helpers {
     }
 
     public static void onServerStartedEvent(ServerStartedEvent event) {
-        LOGGER.info("Server started - setting server instance...");
-       SERVER = event.getServer();
-       LOGGER.info("Server instance set!");
+        SERVER = event.getServer();
     }
 
 }

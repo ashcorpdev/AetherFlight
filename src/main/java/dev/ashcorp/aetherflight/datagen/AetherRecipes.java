@@ -1,14 +1,11 @@
 package dev.ashcorp.aetherflight.datagen;
 
 import dev.ashcorp.aetherflight.setup.Registration;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -26,7 +23,7 @@ public class AetherRecipes extends RecipeProvider {
                 .save(consumer, "aether_crystal1");
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(Registration.RAW_AETHER_CRYSTAL.get()),
-                Registration.REFINED_AETHER_CRYSTAL.get(), 0.0f, 100)
+                        Registration.REFINED_AETHER_CRYSTAL.get(), 0.0f, 100)
                 .unlockedBy("has_chunk", has(Registration.RAW_AETHER_CRYSTAL.get()))
                 .save(consumer, "aether_crystal2");
     }

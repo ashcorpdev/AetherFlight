@@ -27,7 +27,7 @@ public class AetherOres {
                 Registration.AETHER_ORE_OVERWORLD.get().defaultBlockState(), AETHER_ORE_OVERWORLD_VEINSIZE);
 
         OVERWORLD_AETHER_OREGEN = registerPlacedFeature("overworld_aether_ore",
-        Feature.ORE.configured(overworldConfig),
+                Feature.ORE.configured(overworldConfig),
                 CountPlacement.of(AETHER_ORE_OVERWORLD_AMOUNT),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome(),
@@ -41,7 +41,7 @@ public class AetherOres {
     }
 
     public static void onBiomeLoadingEvent(BiomeLoadingEvent event) {
-        if(event.getCategory() != Biome.BiomeCategory.NETHER || event.getCategory() != Biome.BiomeCategory.THEEND) {
+        if (event.getCategory() != Biome.BiomeCategory.NETHER || event.getCategory() != Biome.BiomeCategory.THEEND) {
             event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OVERWORLD_AETHER_OREGEN);
         }
     }
