@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(AetherFlight.MODID)
 public class AetherFlight
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "aetherflight";
 
     public AetherFlight() {
