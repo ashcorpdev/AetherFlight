@@ -103,8 +103,6 @@ public class AetherSiphonItem extends Item {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
-        //TODO: Convert all text to TranslatableComponent instead of TextComponent and use lang files.
-
         if (pStack.getTag() != null) {
             if (!pStack.getTag().getString("owner").isEmpty()) {
 
@@ -113,7 +111,6 @@ public class AetherSiphonItem extends Item {
 
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.tier", pStack.getTag().getInt("tier")).withStyle(ChatFormatting.AQUA));
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.storedAether", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether")).withStyle(ChatFormatting.GREEN));
-                //pTooltipComponents.add(new TextComponent(String.format("Stored Aether: %s / %s", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether"))));
 
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.owner", pLevel.getPlayerByUUID(UUID.fromString(pStack.getTag().getString("owner"))).getDisplayName().getString()).withStyle(ChatFormatting.GOLD));
             } else {
