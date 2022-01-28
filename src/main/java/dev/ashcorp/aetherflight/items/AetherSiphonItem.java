@@ -2,10 +2,12 @@ package dev.ashcorp.aetherflight.items;
 
 import dev.ashcorp.aetherflight.lib.Helpers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -46,6 +48,9 @@ public class AetherSiphonItem extends Item {
 
             if(player.getInventory().countItem(pStack.getItem()) > 1) {
                 stopFlying(player);
+                if(player instanceof LocalPlayer)
+                    player.displayClientMessage(new TranslatableComponent("item.aetherflight.aether_siphon.conflict").withStyle(ChatFormatting.RED), true);
+                    //player.sendMessage(new TranslatableComponent("item.aetherflight.aether_siphon.conflict").withStyle(ChatFormatting.RED), player.getUUID());
                 return;
             }
 

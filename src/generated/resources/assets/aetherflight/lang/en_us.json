@@ -1,6 +1,7 @@
 {
   "block.aetherflight.aether_ore_overworld": "Aether Ore",
   "item.aetherflight.aether_siphon": "Aether Siphon",
+  "item.aetherflight.aether_siphon.conflict": "Another aether siphon is preventing you from flying!",
   "item.aetherflight.aether_siphon.owner": "Owner: %1$s",
   "item.aetherflight.aether_siphon.storedAether": "Stored Aether: %1$s / %2$s",
   "item.aetherflight.aether_siphon.tier": "Tier: %1$s",
