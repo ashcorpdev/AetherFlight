@@ -2,12 +2,27 @@
   "type": "minecraft:crafting_shaped",
   "group": "aetherflight",
   "pattern": [
-    " x ",
-    "x x",
-    " x "
+    "pep",
+    "bob",
+    "csc"
   ],
   "key": {
-    "x": {
+    "p": {
+      "item": "minecraft:ender_pearl"
+    },
+    "e": {
+      "item": "minecraft:elytra"
+    },
+    "b": {
+      "item": "minecraft:purpur_block"
+    },
+    "o": {
+      "item": "minecraft:obsidian"
+    },
+    "c": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "s": {
       "item": "minecraft:end_stone"
     }
   },

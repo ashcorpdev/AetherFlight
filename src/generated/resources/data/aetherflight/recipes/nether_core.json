@@ -2,13 +2,34 @@
   "type": "minecraft:crafting_shaped",
   "group": "aetherflight",
   "pattern": [
-    " x ",
-    "x x",
-    " x "
+    "wtb",
+    "ngs",
+    "lml"
   ],
   "key": {
-    "x": {
+    "w": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "t": {
+      "item": "minecraft:ghast_tear"
+    },
+    "b": {
+      "item": "minecraft:blaze_rod"
+    },
+    "n": {
       "item": "minecraft:netherrack"
+    },
+    "g": {
+      "tag": "forge:ingots/gold"
+    },
+    "s": {
+      "item": "minecraft:soul_sand"
+    },
+    "l": {
+      "item": "minecraft:lava_bucket"
+    },
+    "m": {
+      "item": "minecraft:magma_block"
     }
   },
   "result": {

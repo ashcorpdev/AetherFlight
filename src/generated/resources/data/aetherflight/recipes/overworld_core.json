@@ -2,13 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "group": "aetherflight",
   "pattern": [
-    " x ",
-    "x x",
-    " x "
+    "sss",
+    "sls",
+    "wgw"
   ],
   "key": {
-    "x": {
-      "item": "minecraft:dirt"
+    "s": {
+      "tag": "minecraft:leaves"
+    },
+    "g": {
+      "item": "minecraft:grass_block"
+    },
+    "l": {
+      "tag": "minecraft:logs"
+    },
+    "w": {
+      "item": "minecraft:water_bucket"
     }
   },
   "result": {

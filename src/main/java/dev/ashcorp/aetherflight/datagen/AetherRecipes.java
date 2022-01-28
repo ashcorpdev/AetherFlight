@@ -7,8 +7,11 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
@@ -43,31 +46,45 @@ public class AetherRecipes extends RecipeProvider {
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(Registration.OVERWORLD_CORE.get())
-                .pattern(" x ")
-                .pattern("x x")
-                .pattern(" x ")
-                .define('x', Blocks.DIRT)
+                .pattern("sss")
+                .pattern("sls")
+                .pattern("wgw")
+                .define('s', ItemTags.LEAVES)
+                .define('g', Blocks.GRASS_BLOCK)
+                .define('l', ItemTags.LOGS)
+                .define('w', Items.WATER_BUCKET)
                 .group("aetherflight")
                 .unlockedBy("refinedAetherCrystal", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.REFINED_AETHER_CRYSTAL.get()))
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(Registration.NETHER_CORE.get())
-                .pattern(" x ")
-                .pattern("x x")
-                .pattern(" x ")
-                .define('x', Blocks.NETHERRACK)
+                .pattern("wtb")
+                .pattern("ngs")
+                .pattern("lml")
+                .define('w', Items.WITHER_SKELETON_SKULL)
+                .define('t', Items.GHAST_TEAR)
+                .define('b', Items.BLAZE_ROD)
+                .define('n', Blocks.NETHERRACK)
+                .define('g', Tags.Items.INGOTS_GOLD)
+                .define('s', Blocks.GLOWSTONE)
+                .define('l', Items.LAVA_BUCKET)
+                .define('m', Items.MAGMA_BLOCK)
                 .group("aetherflight")
                 .unlockedBy("overworldCore", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.OVERWORLD_CORE.get()))
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(Registration.END_CORE.get())
-                .pattern(" x ")
-                .pattern("x x")
-                .pattern(" x ")
-                .define('x', Blocks.END_STONE)
+                .pattern("pep")
+                .pattern("bob")
+                .pattern("csc")
+                .define('p', Items.ENDER_EYE)
+                .define('e', Items.ELYTRA)
+                .define('b', Blocks.PURPUR_BLOCK)
+                .define('o', Blocks.OBSIDIAN)
+                .define('c', Items.POPPED_CHORUS_FRUIT)
+                .define('s', Blocks.END_STONE)
                 .group("aetherflight")
                 .unlockedBy("netherCore", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.END_CORE.get()))
                 .save(consumer);
-
     }
 }
