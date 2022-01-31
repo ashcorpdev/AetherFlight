@@ -22,7 +22,7 @@ public class ModSetup {
     public static void setup() {
         IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener(AetherOres::onBiomeLoadingEvent);
-        bus.addListener(Helpers::onServerStartedEvent);
+        bus.addListener(Helpers::onServerStartingEvent);
     }
 
     public static void init(final FMLCommonSetupEvent event) {

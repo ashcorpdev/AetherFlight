@@ -1,5 +1,6 @@
 package dev.ashcorp.aetherflight.events;
 
+import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -49,6 +50,10 @@ public class RuntimeEvents {
             stack.getTag().putString("owner", event.getEntityLiving().getUUID().toString());
             stack.getTag().putInt("storedAether", 0);
             stack.getTag().putInt("maxAether", 1000);
+
+            if(stack.getItem() instanceof AetherSiphonItem) {
+                ((AetherSiphonItem) stack.getItem()).setTierAbilities();
+            }
         }
     }
 }
