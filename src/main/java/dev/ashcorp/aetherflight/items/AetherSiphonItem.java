@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +25,7 @@ public class AetherSiphonItem extends Item {
     private int i;
     private int j;
     public int tier;
-    private List<String> dimensionWhitelist = new ArrayList<>();
-    private List<String> freeDimensions = new ArrayList<>();
+    private int multiplier = 1;
 
     public AetherSiphonItem(Properties pProperties) {
         super(pProperties);
@@ -41,53 +41,6 @@ public class AetherSiphonItem extends Item {
         pProperties.rarity(Rarity.COMMON);
         pProperties.stacksTo(1);
         this.tier = tier;
-    }
-
-    public List<String> getDimensionWhitelist() {
-        return this.dimensionWhitelist;
-    }
-
-    public void setDimensionWhitelist(List<String> list) {
-        this.dimensionWhitelist = list;
-    }
-
-    public List<String> getFreeDimensions() {
-        return this.freeDimensions;
-    }
-
-    public void setFreeDimensions(List<String> list) {
-        this.freeDimensions = list;
-    }
-
-    public void setTierAbilities() {
-
-        switch(this.getTier()) {
-            case 1:
-                getDimensionWhitelist().add(Level.OVERWORLD.getRegistryName().getPath());
-                AetherFlight.LOGGER.info("Added overworld to whitelist.");
-                break;
-            case 2:
-                getDimensionWhitelist().add(Level.OVERWORLD.getRegistryName().getPath());
-                AetherFlight.LOGGER.info("Added overworld to whitelist.");
-                getDimensionWhitelist().add(Level.NETHER.getRegistryName().getPath());
-                AetherFlight.LOGGER.info("Added nether to whitelist.");
-                getFreeDimensions().add(Level.OVERWORLD.getRegistryName().getPath());
-                AetherFlight.LOGGER.info("Added overworld to free list.");
-                break;
-            case 3:
-                // Allow all registered dimensions with a tier 3 siphon.
-
-                // TODO - Make sure to provide a Level to this function to filter them all.
-                for (ResourceKey<Level> dim : Helpers.getServer().levelKeys()) {
-                    getDimensionWhitelist().add(dim.getRegistryName().getPath());
-                    AetherFlight.LOGGER.info(String.format("Added %s to whitelist.", dim.getRegistryName().getPath()));
-                    getFreeDimensions().add(dim.getRegistryName().getPath());
-                    AetherFlight.LOGGER.info(String.format("Added %s to free list.", dim.getRegistryName().getPath()));
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     private static void startFlying(Player player) {
@@ -132,19 +85,44 @@ public class AetherSiphonItem extends Item {
                 return;
             }
 
+            // This is garbage code, but I'm too tired to fix this right now.
+            // TODO - Fix garbage code.
+            switch (this.getTier()) {
+                case 1:
+                    if (player.getLevel().dimension() != Level.OVERWORLD) {
+                        stopFlying(player);
+                    }
+                    break;
+                case 2:
+                    if (player.getLevel().dimension() != Level.OVERWORLD && player.getLevel().dimension() != Level.NETHER) {
+                        stopFlying(player);
+                    }
+                    if (player.getLevel().dimension() == Level.OVERWORLD) {
+                        multiplier = 0;
+                    } else {
+                        multiplier = 1;
+                    }
+                    break;
+                case 3:
+                    // Do tier 3 stuff.
+                    multiplier = 0;
+                    break;
+                default:
+                    break;
+
+            }
+
             // Double checks that the item has the relevant tag.
             if (pStack.getTag() != null) {
 
                 // If the player is allowed to fly and has enough aether, start flying.
-                if ((!player.getAbilities().mayfly && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get())
-                        && this.getDimensionWhitelist().contains(currentDimension.getRegistryName().getPath()) || this.getFreeDimensions().contains(currentDimension.getRegistryName().getPath())) {
-                    AetherFlight.LOGGER.info(String.format("Player can fly... %s %s", this.getDimensionWhitelist().toString(), this.getFreeDimensions().toString()));
+                if ((!player.getAbilities().mayfly && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get())) {
                     startFlying(player);
                 }
 
 
                 // If the player is not allowed to fly, stop them from flying.
-                if ((pStack.getTag().getInt("storedAether") <= ConfigManager.ServerConfig.flightCost.get() && ConfigManager.ServerConfig.flightCost.get() != 0) || !this.getDimensionWhitelist().contains(currentDimension.getRegistryName().getPath())) {
+                if ((pStack.getTag().getInt("storedAether") <= ConfigManager.ServerConfig.flightCost.get() && ConfigManager.ServerConfig.flightCost.get() != 0)) {
                     stopFlying(player);
 
                     // We give the player extra aether to kickstart the recharging. Otherwise player cannot fly anymore.
@@ -152,12 +130,12 @@ public class AetherSiphonItem extends Item {
                 }
 
                 // If the player is currently flying, start draining aether.
-                if (player.getAbilities().mayfly && player.getAbilities().flying && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get() && !this.getFreeDimensions().contains(currentDimension.getRegistryName().getPath())) {
+                if (player.getAbilities().mayfly && player.getAbilities().flying && pStack.getTag().getInt("storedAether") > ConfigManager.ServerConfig.flightCost.get()) {
                     i++;
                     j = 0;
                     if (i >= ConfigManager.ServerConfig.costTimer.get()) {
                         int oldAether = pStack.getTag().getInt("storedAether");
-                        int newAether = oldAether - ConfigManager.ServerConfig.flightCost.get();
+                        int newAether = oldAether - (ConfigManager.ServerConfig.flightCost.get() * multiplier);
                         pStack.getTag().putInt("storedAether", newAether);
                         i = 0;
                     }

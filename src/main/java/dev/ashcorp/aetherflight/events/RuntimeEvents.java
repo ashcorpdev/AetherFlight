@@ -50,10 +50,6 @@ public class RuntimeEvents {
             stack.getTag().putString("owner", event.getEntityLiving().getUUID().toString());
             stack.getTag().putInt("storedAether", 0);
             stack.getTag().putInt("maxAether", 1000);
-
-            if(stack.getItem() instanceof AetherSiphonItem) {
-                ((AetherSiphonItem) stack.getItem()).setTierAbilities();
-            }
         }
     }
 }
