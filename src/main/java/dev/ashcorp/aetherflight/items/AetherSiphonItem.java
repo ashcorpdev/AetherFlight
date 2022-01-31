@@ -20,12 +20,22 @@ import java.util.UUID;
 public class AetherSiphonItem extends Item {
     private int i;
     private int j;
+    public Tier tier;
 
     public AetherSiphonItem(Properties pProperties) {
         super(pProperties);
         pProperties.setNoRepair();
         pProperties.rarity(Rarity.COMMON);
         pProperties.stacksTo(1);
+        this.tier = tier;
+    }
+
+    public AetherSiphonItem(Properties pProperties, Tier tier) {
+        super(pProperties);
+        pProperties.setNoRepair();
+        pProperties.rarity(Rarity.COMMON);
+        pProperties.stacksTo(1);
+        this.tier = tier;
     }
 
     private static void startFlying(Player player) {
@@ -41,6 +51,10 @@ public class AetherSiphonItem extends Item {
             player.getAbilities().flying = false;
             player.onUpdateAbilities();
         }
+    }
+
+    public Tier getTier() {
+        return this.tier;
     }
 
     @Override

@@ -1,13 +1,18 @@
 package dev.ashcorp.aetherflight.setup;
 
+import dev.ashcorp.aetherflight.datagen.AetherSiphonUpgradeRecipe;
+import dev.ashcorp.aetherflight.datagen.CustomShapedRecipeBuilder;
 import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import dev.ashcorp.aetherflight.config.ConfigManager;
+import dev.ashcorp.aetherflight.lib.RecipeHelper;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -49,6 +54,9 @@ public class Registration {
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
     private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
 
+    public static final RecipeType<AetherSiphonUpgradeRecipe> AETHER_SIPHON_UPGRADE_TYPE= new CustomRecipeType<>();
+    public static final RecipeSerializer<AetherSiphonUpgradeRecipe> AETHER_SIPHON_UPGRADE_RECIPE = new AetherSiphonUpgradeRecipe.Serializer(); //TODO: Fix this recipe.
+
     public static void init() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -64,6 +72,13 @@ public class Registration {
     // Convenience function to get the corresponding RegistryObject<Item> from a RegistryObject<Block>.
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
+    }
+
+    private static class CustomRecipeType<T extends Recipe<?>> implements RecipeType<T> {
+        @Override
+        public String toString() {
+            return Registry.RECIPE_TYPE.getKey(this).toString();
+        }
     }
 
 }
