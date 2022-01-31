@@ -2,6 +2,7 @@ package dev.ashcorp.aetherflight.items;
 
 import dev.ashcorp.aetherflight.config.ConfigManager;
 import dev.ashcorp.aetherflight.lib.Helpers;
+import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
@@ -62,7 +63,15 @@ public class AetherSiphonItem extends Item {
 
         if (pEntity instanceof Player player) {
 
-            if (player.getInventory().countItem(pStack.getItem()) > 1) {
+            int siphonCount = 0;
+
+            for(int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                if(player.getInventory().getItem(i).getItem() instanceof AetherSiphonItem) {
+                    siphonCount++;
+                }
+            }
+
+            if (siphonCount > 1) {
                 stopFlying(player);
                 if (player instanceof LocalPlayer)
                     player.displayClientMessage(new TranslatableComponent("item.aetherflight.aether_siphon.conflict").withStyle(ChatFormatting.RED), true);
