@@ -45,7 +45,7 @@ public class Registration {
 
     public static final RegistryObject<AetherSiphonItem> BASIC_AETHER_SIPHON = ITEMS.register("aether_siphon", () -> new AetherSiphonItem(ITEM_PROPERTIES));
     public static final RegistryObject<AetherSiphonItem> NETHER_AETHER_SIPHON = ITEMS.register("nether_aether_siphon", () -> new AetherSiphonItem(ITEM_PROPERTIES, 2));
-    public static final RegistryObject<AetherSiphonItem> END_AETHER_SIPHON = ITEMS.register("", () -> new AetherSiphonItem(ITEM_PROPERTIES, 3));
+    public static final RegistryObject<AetherSiphonItem> END_AETHER_SIPHON = ITEMS.register("end_aether_siphon", () -> new AetherSiphonItem(ITEM_PROPERTIES, 3));
 
     public static final RegistryObject<Item> OVERWORLD_CORE = ITEMS.register("overworld_core", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> NETHER_CORE = ITEMS.register("nether_core", () -> new Item(ITEM_PROPERTIES));

@@ -1,11 +1,11 @@
 {
   "block.aetherflight.aether_ore_overworld": "Aether Ore",
-  "item.aetherflight.": "End Aether Siphon",
   "item.aetherflight.aether_siphon": "Basic Aether Siphon",
   "item.aetherflight.aether_siphon.conflict": "Another aether siphon is preventing you from flying!",
   "item.aetherflight.aether_siphon.owner": "Owner: %1$s",
   "item.aetherflight.aether_siphon.storedAether": "Stored Aether: %1$s / %2$s",
   "item.aetherflight.aether_siphon.tier": "Tier: %1$s",
+  "item.aetherflight.end_aether_siphon": "End Aether Siphon",
   "item.aetherflight.end_core": "End Core",
   "item.aetherflight.nether_aether_siphon": "Nether Aether Siphon",
   "item.aetherflight.nether_core": "Nether Core",

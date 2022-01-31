@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "aetherflight:"
+      "aetherflight:end_aether_siphon"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "aetherflight:"
+        "recipe": "aetherflight:end_aether_siphon"
       }
     }
   },
