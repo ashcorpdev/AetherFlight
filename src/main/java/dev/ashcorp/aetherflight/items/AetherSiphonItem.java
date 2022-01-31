@@ -2,7 +2,6 @@ package dev.ashcorp.aetherflight.items;
 
 import dev.ashcorp.aetherflight.config.ConfigManager;
 import dev.ashcorp.aetherflight.lib.Helpers;
-import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
@@ -58,10 +57,15 @@ public class AetherSiphonItem extends Item {
         return this.tier;
     }
 
+
+
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
         if (pEntity instanceof Player player) {
+
+            Level currentDimension = player.getLevel();
+
 
             int siphonCount = 0;
 
@@ -141,7 +145,7 @@ public class AetherSiphonItem extends Item {
                 UUID uuid = UUID.fromString(pStack.getTag().getString("owner"));
                 Player player = Helpers.getPlayerFromUUID(uuid);
 
-                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.tier", this.tier));
+                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.tier", this.tier).withStyle(ChatFormatting.AQUA));
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.storedAether", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether")).withStyle(ChatFormatting.GREEN));
 
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.owner", pLevel.getPlayerByUUID(UUID.fromString(pStack.getTag().getString("owner"))).getDisplayName().getString()).withStyle(ChatFormatting.GOLD));
