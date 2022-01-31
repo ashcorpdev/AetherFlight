@@ -1,7 +1,7 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import dev.ashcorp.aetherflight.config.ConfigManager;
+import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -9,7 +9,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;

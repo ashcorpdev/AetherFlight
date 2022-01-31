@@ -1,6 +1,5 @@
 package dev.ashcorp.aetherflight.items;
 
-import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.config.ConfigManager;
 import dev.ashcorp.aetherflight.lib.Helpers;
 import net.minecraft.ChatFormatting;
@@ -16,8 +15,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

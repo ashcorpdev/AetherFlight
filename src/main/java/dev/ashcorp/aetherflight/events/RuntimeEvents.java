@@ -1,6 +1,5 @@
 package dev.ashcorp.aetherflight.events;
 
-import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
