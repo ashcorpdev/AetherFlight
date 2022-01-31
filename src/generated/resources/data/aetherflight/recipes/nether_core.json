@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "aetherflight",
+  "group": "nether_core",
   "pattern": [
     "wtb",
     "ngs",
@@ -23,7 +23,7 @@
       "tag": "forge:ingots/gold"
     },
     "s": {
-      "item": "minecraft:soul_sand"
+      "item": "minecraft:glowstone"
     },
     "l": {
       "item": "minecraft:lava_bucket"

@@ -1,10 +1,7 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.datagen.AetherSiphonUpgradeRecipe;
-import dev.ashcorp.aetherflight.datagen.CustomShapedRecipeBuilder;
 import dev.ashcorp.aetherflight.items.AetherSiphonItem;
 import dev.ashcorp.aetherflight.config.ConfigManager;
-import dev.ashcorp.aetherflight.lib.RecipeHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -45,7 +42,9 @@ public class Registration {
     public static final RegistryObject<Item> RAW_AETHER_CRYSTAL = ITEMS.register("raw_aether_crystal", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> REFINED_AETHER_CRYSTAL = ITEMS.register("refined_aether_crystal", () -> new Item(ITEM_PROPERTIES));
 
-    public static final RegistryObject<AetherSiphonItem> AETHER_SIPHON = ITEMS.register("aether_siphon", () -> new AetherSiphonItem(ITEM_PROPERTIES));
+    public static final RegistryObject<AetherSiphonItem> BASIC_AETHER_SIPHON = ITEMS.register("aether_siphon", () -> new AetherSiphonItem(ITEM_PROPERTIES));
+    public static final RegistryObject<AetherSiphonItem> NETHER_AETHER_SIPHON = ITEMS.register("nether_aether_siphon", () -> new AetherSiphonItem(ITEM_PROPERTIES, 2));
+    public static final RegistryObject<AetherSiphonItem> END_AETHER_SIPHON = ITEMS.register("", () -> new AetherSiphonItem(ITEM_PROPERTIES, 3));
 
     public static final RegistryObject<Item> OVERWORLD_CORE = ITEMS.register("overworld_core", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> NETHER_CORE = ITEMS.register("nether_core", () -> new Item(ITEM_PROPERTIES));
@@ -53,9 +52,6 @@ public class Registration {
 
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MODID);
     private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
-
-    public static final RecipeType<AetherSiphonUpgradeRecipe> AETHER_SIPHON_UPGRADE_TYPE= new CustomRecipeType<>();
-    public static final RecipeSerializer<AetherSiphonUpgradeRecipe> AETHER_SIPHON_UPGRADE_RECIPE = new AetherSiphonUpgradeRecipe.Serializer(); //TODO: Fix this recipe.
 
     public static void init() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

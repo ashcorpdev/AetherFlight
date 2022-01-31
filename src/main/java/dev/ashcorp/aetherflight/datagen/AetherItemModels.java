@@ -23,8 +23,14 @@ public class AetherItemModels extends ItemModelProvider {
         singleTexture(Registration.REFINED_AETHER_CRYSTAL.get().getRegistryName().getPath(), mcLoc("item/generated"),
                 "layer0", modLoc("item/refined_aether_crystal"));
 
-        singleTexture(Registration.AETHER_SIPHON.get().getRegistryName().getPath(), mcLoc("item/generated"),
-                "layer0", modLoc("item/aether_siphon"));
+        singleTexture(Registration.BASIC_AETHER_SIPHON.get().getRegistryName().getPath(), mcLoc("item/generated"),
+                "layer0", modLoc("item/basic_aether_siphon"));
+
+        singleTexture(Registration.NETHER_AETHER_SIPHON.get().getRegistryName().getPath(), mcLoc("item/generated"),
+                "layer0", modLoc("item/nether_aether_siphon"));
+
+        singleTexture(Registration.END_AETHER_SIPHON.get().getRegistryName().getPath(), mcLoc("item/generated"),
+                "layer0", modLoc("item/end_aether_siphon"));
 
         singleTexture(Registration.OVERWORLD_CORE.get().getRegistryName().getPath(), mcLoc("item/generated"),
                 "layer0", modLoc("item/overworld_core"));

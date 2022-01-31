@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aetherflight:item/basic_aether_siphon"
+    "layer0": "aetherflight:item/end_aether_siphon"
   }
 }

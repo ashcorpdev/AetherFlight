@@ -3,21 +3,24 @@
   "group": "aether_siphon",
   "pattern": [
     "mcm",
-    "x x",
+    "xdx",
     " x "
   ],
   "key": {
     "c": {
-      "item": "aetherflight:overworld_core"
+      "item": "aetherflight:end_core"
     },
     "x": {
       "tag": "forge:ingots/gold"
     },
     "m": {
       "item": "aetherflight:refined_aether_crystal"
+    },
+    "d": {
+      "item": "aetherflight:nether_aether_siphon"
     }
   },
   "result": {
-    "item": "aetherflight:aether_siphon"
+    "item": "aetherflight:"
   }
 }

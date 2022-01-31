@@ -35,7 +35,6 @@ public class RuntimeEvents {
 
             // Check if the item has no tag for some reason - this should resolve this.
 
-            int tier = stack.getOrCreateTag().getInt("tier");
             int storedAether = stack.getOrCreateTag().getInt("storedAether");
             int maxAether = stack.getOrCreateTag().getInt("maxAether");
             String owner = stack.getOrCreateTag().getString("owner");
@@ -48,7 +47,6 @@ public class RuntimeEvents {
         } else if (!owner.equals(event.getEntityLiving().getUUID().toString())) {
             // Set the owner.
             stack.getTag().putString("owner", event.getEntityLiving().getUUID().toString());
-            stack.getTag().putInt("tier", 1);
             stack.getTag().putInt("storedAether", 0);
             stack.getTag().putInt("maxAether", 1000);
         }

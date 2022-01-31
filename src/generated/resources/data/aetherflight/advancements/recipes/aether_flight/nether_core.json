@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "overworldCore": {
+    "overworld_core": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "overworldCore",
+      "overworld_core",
       "has_the_recipe"
     ]
   ]

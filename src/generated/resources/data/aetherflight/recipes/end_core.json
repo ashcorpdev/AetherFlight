@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "aetherflight",
+  "group": "end_core",
   "pattern": [
     "pep",
     "bob",
@@ -8,7 +8,7 @@
   ],
   "key": {
     "p": {
-      "item": "minecraft:ender_pearl"
+      "item": "minecraft:ender_eye"
     },
     "e": {
       "item": "minecraft:elytra"

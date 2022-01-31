@@ -20,17 +20,17 @@ import java.util.UUID;
 public class AetherSiphonItem extends Item {
     private int i;
     private int j;
-    public Tier tier;
+    public int tier;
 
     public AetherSiphonItem(Properties pProperties) {
         super(pProperties);
         pProperties.setNoRepair();
         pProperties.rarity(Rarity.COMMON);
         pProperties.stacksTo(1);
-        this.tier = tier;
+        this.tier = 1;
     }
 
-    public AetherSiphonItem(Properties pProperties, Tier tier) {
+    public AetherSiphonItem(Properties pProperties, int tier) {
         super(pProperties);
         pProperties.setNoRepair();
         pProperties.rarity(Rarity.COMMON);
@@ -53,7 +53,7 @@ public class AetherSiphonItem extends Item {
         }
     }
 
-    public Tier getTier() {
+    public int getTier() {
         return this.tier;
     }
 
@@ -116,7 +116,6 @@ public class AetherSiphonItem extends Item {
     @Override
     public void onCraftedBy(ItemStack pStack, Level pLevel, Player pPlayer) {
 
-        int tier = pStack.getOrCreateTag().getInt("tier");
         int storedAether = pStack.getOrCreateTag().getInt("storedAether");
         int maxAether = pStack.getOrCreateTag().getInt("maxAether");
         String owner = pStack.getOrCreateTag().getString("owner");
@@ -133,7 +132,7 @@ public class AetherSiphonItem extends Item {
                 UUID uuid = UUID.fromString(pStack.getTag().getString("owner"));
                 Player player = Helpers.getPlayerFromUUID(uuid);
 
-                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.tier", pStack.getTag().getInt("tier")).withStyle(ChatFormatting.AQUA));
+                pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.tier", this.tier));
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.storedAether", pStack.getTag().getInt("storedAether"), pStack.getTag().getInt("maxAether")).withStyle(ChatFormatting.GREEN));
 
                 pTooltipComponents.add(new TranslatableComponent("item.aetherflight.aether_siphon.owner", pLevel.getPlayerByUUID(UUID.fromString(pStack.getTag().getString("owner"))).getDisplayName().getString()).withStyle(ChatFormatting.GOLD));

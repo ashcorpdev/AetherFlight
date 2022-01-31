@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "aetherflight:overworld_core"
+      "minecraft:has_refined_crystal"
     ]
   },
   "criteria": {
-    "has_refined_crystal": {
+    "has_raw_crystal": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "aetherflight:refined_aether_crystal"
+              "aetherflight:raw_aether_crystal"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "aetherflight:overworld_core"
+        "recipe": "minecraft:has_refined_crystal"
       }
     }
   },
   "requirements": [
     [
-      "has_refined_crystal",
+      "has_raw_crystal",
       "has_the_recipe"
     ]
   ]

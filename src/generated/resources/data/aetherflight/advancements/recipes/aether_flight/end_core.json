@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "netherCore": {
+    "nether_core": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "aetherflight:end_core"
+              "aetherflight:nether_core"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "netherCore",
+      "nether_core",
       "has_the_recipe"
     ]
   ]

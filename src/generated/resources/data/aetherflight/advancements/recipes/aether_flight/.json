@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:aether_crystal2"
+      "aetherflight:"
     ]
   },
   "criteria": {
-    "has_chunk": {
+    "has_refined_crystal": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "aetherflight:raw_aether_crystal"
+              "aetherflight:nether_aether_siphon"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:aether_crystal2"
+        "recipe": "aetherflight:"
       }
     }
   },
   "requirements": [
     [
-      "has_chunk",
+      "has_refined_crystal",
       "has_the_recipe"
     ]
   ]

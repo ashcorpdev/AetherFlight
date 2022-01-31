@@ -11,7 +11,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
@@ -34,7 +33,7 @@ public class AetherRecipes extends RecipeProvider {
                 .unlockedBy("has_raw_crystal", has(Registration.RAW_AETHER_CRYSTAL.get()))
                 .save(consumer, "has_refined_crystal");
 
-        ShapedRecipeBuilder.shaped(Registration.AETHER_SIPHON.get())
+        ShapedRecipeBuilder.shaped(Registration.BASIC_AETHER_SIPHON.get())
                 .pattern("mcm")
                 .pattern("x x")
                 .pattern(" x ")
@@ -43,6 +42,30 @@ public class AetherRecipes extends RecipeProvider {
                 .define('m', Registration.REFINED_AETHER_CRYSTAL.get())
                 .group("aether_siphon")
                 .unlockedBy("has_refined_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.REFINED_AETHER_CRYSTAL.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(Registration.NETHER_AETHER_SIPHON.get())
+                .pattern("mcm")
+                .pattern("xdx")
+                .pattern(" x ")
+                .define('c', Registration.NETHER_CORE.get())
+                .define('x', Tags.Items.INGOTS_GOLD)
+                .define('m', Registration.REFINED_AETHER_CRYSTAL.get())
+                .define('d', Registration.BASIC_AETHER_SIPHON.get())
+                .group("aether_siphon")
+                .unlockedBy("has_refined_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.BASIC_AETHER_SIPHON.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(Registration.END_AETHER_SIPHON.get())
+                .pattern("mcm")
+                .pattern("xdx")
+                .pattern(" x ")
+                .define('c', Registration.END_CORE.get())
+                .define('x', Tags.Items.INGOTS_GOLD)
+                .define('m', Registration.REFINED_AETHER_CRYSTAL.get())
+                .define('d', Registration.NETHER_AETHER_SIPHON.get())
+                .group("aether_siphon")
+                .unlockedBy("has_refined_crystal", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NETHER_AETHER_SIPHON.get()))
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(Registration.OVERWORLD_CORE.get())
@@ -85,21 +108,6 @@ public class AetherRecipes extends RecipeProvider {
                 .define('s', Blocks.END_STONE)
                 .group("end_core")
                 .unlockedBy("nether_core", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NETHER_CORE.get()))
-                .save(consumer);
-
-        //TODO - Ensure this uses the correct tier of siphon.
-        CustomShapedRecipeBuilder.shaped(Registration.AETHER_SIPHON_UPGRADE_RECIPE, Registration.AETHER_SIPHON.get())
-                .pattern("pep")
-                .pattern("bob")
-                .pattern("csc")
-                .define('p', Items.ENDER_EYE)
-                .define('e', Items.ELYTRA)
-                .define('b', Blocks.PURPUR_BLOCK)
-                .define('o', Registration.AETHER_SIPHON.get())
-                .define('c', Items.POPPED_CHORUS_FRUIT)
-                .define('s', Blocks.END_STONE)
-                .group("siphon_upgrade")
-                .unlockedBy("overworld_core", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.AETHER_SIPHON.get()))
                 .save(consumer);
     }
 }

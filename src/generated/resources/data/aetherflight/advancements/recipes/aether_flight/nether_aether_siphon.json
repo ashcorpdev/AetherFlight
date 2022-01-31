@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "aetherflight:overworld_core"
+      "aetherflight:nether_aether_siphon"
     ]
   },
   "criteria": {
@@ -12,7 +12,7 @@
         "items": [
           {
             "items": [
-              "aetherflight:refined_aether_crystal"
+              "aetherflight:aether_siphon"
             ]
           }
         ]
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "aetherflight:overworld_core"
+        "recipe": "aetherflight:nether_aether_siphon"
       }
     }
   },

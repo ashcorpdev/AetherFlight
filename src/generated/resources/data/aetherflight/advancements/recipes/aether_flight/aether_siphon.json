@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "refinedAetherCrystal": {
+    "has_refined_crystal": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "refinedAetherCrystal",
+      "has_refined_crystal",
       "has_the_recipe"
     ]
   ]
