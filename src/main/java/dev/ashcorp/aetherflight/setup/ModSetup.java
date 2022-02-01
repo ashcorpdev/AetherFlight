@@ -1,7 +1,7 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.blocks.AetherOres;
-import dev.ashcorp.aetherflight.lib.Helpers;
+import dev.ashcorp.aetherflight.common.blocks.AetherOres;
+import dev.ashcorp.aetherflight.common.items.lib.Helpers;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;

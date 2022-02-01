@@ -1,6 +1,8 @@
-package dev.ashcorp.aetherflight.events;
+package dev.ashcorp.aetherflight.common.events;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.settings.KeyBindingMap;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -51,4 +53,10 @@ public class RuntimeEvents {
             stack.getTag().putInt("maxAether", 1000);
         }
     }
+
+    @SubscribeEvent
+    public static void onKeypressEvent(InputEvent.KeyInputEvent event) {
+
+    }
+
 }

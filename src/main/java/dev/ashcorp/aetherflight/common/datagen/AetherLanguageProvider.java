@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.datagen;
+package dev.ashcorp.aetherflight.common.datagen;
 
 import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.setup.Registration;

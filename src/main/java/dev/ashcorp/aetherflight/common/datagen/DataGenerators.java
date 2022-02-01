@@ -1,7 +1,7 @@
-package dev.ashcorp.aetherflight.datagen;
+package dev.ashcorp.aetherflight.common.datagen;
 
 import dev.ashcorp.aetherflight.AetherFlight;
-import dev.ashcorp.aetherflight.blocks.AetherBlockStates;
+import dev.ashcorp.aetherflight.common.blocks.AetherBlockStates;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

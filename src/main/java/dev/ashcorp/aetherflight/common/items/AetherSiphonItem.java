@@ -1,7 +1,7 @@
-package dev.ashcorp.aetherflight.items;
+package dev.ashcorp.aetherflight.common.items;
 
-import dev.ashcorp.aetherflight.config.ConfigManager;
-import dev.ashcorp.aetherflight.lib.Helpers;
+import dev.ashcorp.aetherflight.common.items.lib.Helpers;
+import dev.ashcorp.aetherflight.common.config.ConfigManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;

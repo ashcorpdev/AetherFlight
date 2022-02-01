@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.config;
+package dev.ashcorp.aetherflight.common.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

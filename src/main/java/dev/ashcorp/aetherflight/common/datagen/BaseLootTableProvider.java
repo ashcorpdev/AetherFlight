@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.datagen;
+package dev.ashcorp.aetherflight.common.datagen;
 
 
 import com.google.gson.Gson;

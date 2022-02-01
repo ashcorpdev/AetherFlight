@@ -1,7 +1,7 @@
 package dev.ashcorp.aetherflight.setup;
 
-import dev.ashcorp.aetherflight.config.ConfigManager;
-import dev.ashcorp.aetherflight.items.AetherSiphonItem;
+import dev.ashcorp.aetherflight.common.config.ConfigManager;
+import dev.ashcorp.aetherflight.common.items.AetherSiphonItem;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;

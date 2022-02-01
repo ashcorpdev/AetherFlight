@@ -1,4 +1,4 @@
-package dev.ashcorp.aetherflight.blocks;
+package dev.ashcorp.aetherflight.common.blocks;
 
 import dev.ashcorp.aetherflight.setup.Registration;
 import net.minecraft.data.BuiltinRegistries;
