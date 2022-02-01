@@ -1,24 +1,29 @@
 package dev.ashcorp.aetherflight.common.items;
 
+import dev.ashcorp.aetherflight.AetherFlight;
 import dev.ashcorp.aetherflight.common.items.lib.Helpers;
 import dev.ashcorp.aetherflight.common.config.ConfigManager;
+import dev.ashcorp.aetherflight.common.network.AetherHotkeyListener;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-public class AetherSiphonItem extends Item {
+public class AetherSiphonItem extends Item implements AetherHotkeyListener {
     private int i;
     private int j;
     public int tier;
@@ -52,6 +57,19 @@ public class AetherSiphonItem extends Item {
             player.getAbilities().mayfly = false;
             player.getAbilities().flying = false;
             player.onUpdateAbilities();
+        }
+    }
+
+    public void boost(Player player) {
+        AetherFlight.LOGGER.info("Attempting to boost player.");
+        if(this.getTier() != 3) {
+            return;
+        }
+
+        if(player instanceof LocalPlayer) {
+
+            // Write boost code.
+
         }
     }
 

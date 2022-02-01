@@ -2,6 +2,7 @@ package dev.ashcorp.aetherflight.setup;
 
 import dev.ashcorp.aetherflight.common.blocks.AetherOres;
 import dev.ashcorp.aetherflight.common.items.lib.Helpers;
+import dev.ashcorp.aetherflight.common.network.NetworkHelper;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,6 +29,7 @@ public class ModSetup {
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             AetherOres.registerConfiguredFeatures();
+            NetworkHelper.registerMessages();
         });
     }
 }

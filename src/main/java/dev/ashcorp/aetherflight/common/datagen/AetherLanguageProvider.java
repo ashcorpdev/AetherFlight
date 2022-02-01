@@ -28,5 +28,7 @@ public class AetherLanguageProvider extends net.minecraftforge.common.data.Langu
         add("item.aetherflight.aether_siphon.owner", "Owner: %1$s");
         add("item.aetherflight.aether_siphon.storedAether", "Stored Aether: %1$s / %2$s");
         add("item.aetherflight.aether_siphon.conflict", "Another aether siphon is preventing you from flying!");
+        add("key.category.aetherflight.general", "Aether Flight");
+        add("key.aetherflight.boost_flight", "Boost");
     }
 }
